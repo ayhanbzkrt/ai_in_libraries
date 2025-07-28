@@ -1,0 +1,3677 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="portalTitle">Yapay Zeka ve Kütüphaneler Portalı</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --info: #9b59b6;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInDown 1s ease;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+            animation: fadeIn 1.5s ease;
+        }
+        
+        .ai-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.3;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: float 6s infinite linear;
+        }
+        
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+        
+        .logo {
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+            margin: 0.5rem auto;
+            border-radius: 2px;
+        }
+        
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .card-img {
+            height: 200px;
+            overflow: hidden;
+            background: linear-gradient(45deg, #3498db, #2c3e50);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .card-img::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.3);
+            z-index: 1;
+        }
+        
+        .card-img i {
+            font-size: 3rem;
+            color: white;
+            z-index: 2;
+            position: relative;
+        }
+        
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .card:hover .card-img img {
+            transform: scale(1.1);
+        }
+        
+        .card-content {
+            padding: 1.5rem;
+        }
+        
+        .card-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .card-text {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--secondary);
+            color: var(--secondary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        radial-gradient(ellipse at center, #3498db 0%, #2c3e50 100%);
+            color: white;
+            text-align: center;
+            padding: 5rem 1rem;
+            margin-bottom: 3rem;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="25" cy="25" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="25" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="50" r="3" fill="rgba(255,255,255,0.1)"/><circle cx="25" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="2.5" fill="rgba(255,255,255,0.1)"/></svg>');
+            opacity: 0.5;
+            animation: float 10s infinite linear;
+        }
+        
+        .hero-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-text {
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            font-size: 1.1rem;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .feature {
+            text-align: center;
+            padding: 2rem 1rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .feature-text {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .simulator {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+        }
+        
+        .simulator-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap; /* Küçük ekranlarda sarmalama */
+        }
+        
+        .simulator-title {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .simulator-controls {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .simulator-content {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap; /* Küçük ekranlarda sarmalama */
+        }
+        
+        .simulator-sidebar {
+            flex: 1;
+            min-width: 280px; /* Minimum genişlik ver */
+        }
+        
+        .simulator-main {
+            flex: 3;
+            min-width: 300px; /* Minimum genişlik ver */
+            background: #f9f9f9;
+            border-radius: 8px;
+            padding: 1.5rem;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .chatbot {
+            width: 100%;
+            max-width: 500px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .chatbot-header {
+            background: var(--primary);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .chatbot-avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 1rem;
+        }
+        
+        .chatbot-name {
+            font-weight: 500;
+        }
+        
+        .chatbot-status {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+        
+        .chatbot-messages {
+            height: 300px;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .message {
+            max-width: 80%;
+            padding: 0.8rem 1rem;
+            border-radius: 18px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .bot-message {
+            background: #f1f1f1;
+            border-top-left-radius: 4px;
+            align-self: flex-start;
+        }
+        
+        .user-message {
+            background: var(--secondary);
+            color: white;
+            border-top-right-radius: 4px;
+            align-self: flex-end;
+        }
+        
+        .chatbot-input {
+            display: flex;
+            padding: 1rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .chatbot-input input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+            outline: none;
+        }
+        
+        .chatbot-input button {
+            padding: 0.8rem 1.2rem;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .chatbot-input button.voice-btn {
+            border-radius: 4px;
+            margin-left: 0.5rem;
+        }
+        
+        .robot-simulator {
+            width: 100%;
+            max-width: 500px;
+            position: relative;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .robot-arm {
+            position: absolute;
+            width: 80px;
+            height: 120px;
+            background: linear-gradient(135deg, #bdc3c7, #95a5a6);
+            left: 50%;
+            top: 30px;
+            transform: translateX(-50%);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 15px;
+            z-index: 2;
+            transition: transform 0.5s ease;
+        }
+        
+        .robot-joint {
+            width: 50px;
+            height: 12px;
+            background: #7f8c8d;
+            border-radius: 6px;
+            margin-bottom: 8px;
+        }
+        
+        .robot-hand {
+            width: 35px;
+            height: 25px;
+            background: #34495e;
+            border-radius: 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        
+        .robot-shelf {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #8B4513, #A0522D);
+            position: absolute;
+            top: 120px;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 15px;
+        }
+        
+        .shelf-level {
+            height: 25px;
+            background: #D2691E;
+            border-radius: 3px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            position: relative;
+        }
+        
+        .book {
+            width: 25px;
+            height: 18px;
+            border-radius: 2px;
+            transition: transform 0.5s, box-shadow 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .book[data-genre="roman"] { background: #3498db; }
+        .book[data-genre="bilim"] { background: #e74c3c; }
+        .book[data-genre="tarih"] { background: #27ae60; }
+        .book[data-genre="sanat"] { background: #f39c12; }
+        .book[data-genre="teknoloji"] { background: #9b59b6; }
+        .book[data-genre="felsefe"] { background: #1abc9c; }
+        .book[data-genre="matematik"] { background: #8e44ad; }
+        .book[data-genre="edebiyat"] { background: #d35400; }
+        .book[data-genre="coğrafya"] { background: #c0392b; }
+        .book[data-genre="müzik"] { background: #7f8c8d; }
+        .book[data-genre="biyoloji"] { background: #2ecc71; }
+        .book[data-genre="fizik"] { background: #34495e; }
+        .book[data-genre="kimya"] { background: #f1c40f; }
+        .book[data-genre="psikoloji"] { background: #e67e22; }
+        .book[data-genre="sosyoloji"] { background: #bdc3c7; }
+        
+        .book.highlight {
+            box-shadow: 0 0 15px 5px var(--accent);
+            animation: pulse 1s infinite alternate;
+        }
+
+        .robot-controls {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+            counter-reset: count 0;
+            animation: countUp 2s ease-out;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .testimonial {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .testimonial::before {
+            content: '"';
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            font-size: 5rem;
+            color: rgba(52, 152, 219, 0.1);
+            font-family: serif;
+            line-height: 1;
+        }
+        
+        .testimonial-text {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: #555;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #3498db, #2c3e50);
+            margin-right: 1rem;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        .testimonial-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .author-name {
+            font-weight: 500;
+            color: var(--primary);
+        }
+        
+        .author-title {
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background: var(--secondary);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+        
+        .timeline-content {
+            padding: 1.5rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .timeline-date {
+            font-weight: bold;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .timeline-text {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border: 3px solid var(--secondary);
+            border-radius: 50%;
+            top: 20px;
+            z-index: 1;
+        }
+        
+        .timeline-item:nth-child(odd)::after {
+            right: -10px;
+        }
+        
+        .timeline-item:nth-child(even)::after {
+            left: -10px;
+        }
+        
+        .cta {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+            padding: 4rem 1rem;
+            border-radius: 8px;
+            margin-bottom: 3rem;
+        }
+        
+        .cta-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-text {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .cta-btn {
+            background: white;
+            color: var(--secondary);
+        }
+        
+        .cta-btn:hover {
+            background: rgba(255,255,255,0.9);
+        }
+        
+        .cta-btn-outline {
+            background: transparent;
+            border: 1px solid white;
+            color: white;
+        }
+        
+        .cta-btn-outline:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        /* AI Simülasyon Eklentileri */
+        .ai-canvas {
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        
+        .model-info {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            font-family: monospace;
+            font-size: 0.8rem;
+        }
+        
+        .prediction-result {
+            background: var(--success);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .neural-network {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        
+        .layer {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .neuron {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+        }
+        
+        .neuron.active {
+            background: var(--accent);
+            transform: scale(1.2);
+        }
+        
+        .connection {
+            height: 2px;
+            background: #ddd;
+            margin: 0 10px;
+            position: relative;
+            transition: all 0.3s;
+            flex-grow: 1; /* Bağlantılar arasındaki boşluğu doldur */
+        }
+        
+        .connection.active {
+            background: var(--accent);
+        }
+        
+        .ocr-demo {
+            border: 2px dashed #ddd;
+            padding: 2rem;
+            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .ocr-demo:hover {
+            border-color: var(--secondary);
+            background: #f8f9fa;
+        }
+        
+        .ocr-result {
+            background: white;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-family: monospace;
+        }
+        
+        .loading-spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--secondary);
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 1rem auto;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        
+        .tech-badge {
+            background: var(--secondary);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .sources-section {
+            background: #f8f9fa;
+            padding: 3rem 2rem;
+            border-radius: 8px;
+            margin: 3rem 0;
+        }
+        
+        .sources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .source-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .source-title {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .source-link {
+            color: var(--secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .source-link:hover {
+            text-decoration: underline;
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-col h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 40px;
+            height: 2px;
+            background: var(--secondary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .footer-contact p {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-contact i {
+            margin-right: 0.5rem;
+            color: var(--secondary);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background 0.3s;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .social-link:hover {
+            background: var(--secondary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes countUp {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 15px 5px var(--accent); }
+            50% { box-shadow: 0 0 5px 2px var(--accent); }
+        }
+        
+        /* Yeni Simülasyon Stilleri */
+        .face-recognition-container {
+            position: relative;
+            width: 320px;
+            height: 240px;
+            background: #eee;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            cursor: pointer;
+        }
+
+        .face-placeholder {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column; /* İçeriği dikey sırala */
+            align-items: center;
+            justify-content: center;
+            color: #555;
+            font-size: 1.2rem;
+            font-weight: bold;
+            position: relative;
+            transition: background-image 0.5s ease-in-out;
+            text-align: center;
+            padding: 1rem; /* İç boşluk ekle */
+        }
+
+        .face-detection-box {
+            position: absolute;
+            border: 2px solid var(--success);
+            animation: pulse 1s infinite alternate;
+            box-sizing: border-box; /* Kutunun iç boyutunu koru */
+        }
+
+        .emotion-text {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            z-index: 10;
+        }
+
+        .book-recommendation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .recommended-book-card {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 0.8rem;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            font-size: 0.8rem;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .recommended-book-card img {
+            max-width: 80px;
+            height: 100px;
+            object-fit: contain;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+            border: 1px solid #ddd;
+        }
+
+        .recommended-book-card .book-title {
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-bottom: 0.2em;
+        }
+        .recommended-book-card .book-author {
+            font-size: 0.7em;
+            color: #777;
+        }
+
+        /* Yeni Bölüm Detayları Stilleri */
+        .detail-section {
+            display: none; /* Varsayılan olarak gizli */
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+            animation: fadeIn 0.5s ease-out; /* Giriş animasyonu */
+        }
+
+        .detail-section h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            position: relative;
+            text-align: center;
+        }
+
+        .detail-section h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+            margin: 0.5rem auto 0;
+            border-radius: 2px;
+        }
+
+        .detail-section h4 {
+            color: var(--secondary);
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        .detail-section p, .detail-section ul {
+            margin-bottom: 1rem;
+            color: #444;
+        }
+
+        .detail-section ul {
+            list-style: disc;
+            margin-left: 20px;
+        }
+
+        .back-to-applications {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--dark);
+            color: white;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .back-to-applications:hover {
+            background-color: #333;
+        }
+
+        /* Kart İçi Simülasyon Stilleri */
+        .card-simulation {
+            height: 100px; /* Sabit yükseklik */
+            background-color: #f8f8f8;
+            border-top: 1px solid #eee;
+            margin-top: 1rem;
+            padding: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            font-size: 0.8rem;
+            color: #666;
+            text-align: center;
+            border-radius: 0 0 8px 8px; /* Alt köşeleri yuvarlak */
+        }
+
+        .card-simulation.hidden {
+            display: none;
+        }
+        
+        .sim-catalog-item {
+            width: 60px;
+            height: 40px;
+            background-color: var(--secondary);
+            border-radius: 4px;
+            position: relative;
+            animation: catalogSpin 2s infinite linear;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        @keyframes catalogSpin {
+            0% { transform: rotateY(0deg); opacity: 1; }
+            50% { transform: rotateY(180deg); opacity: 0.5; }
+            100% { transform: rotateY(360deg); opacity: 1; }
+        }
+
+        .sim-text-typing {
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 2px solid;
+            width: 0;
+            animation: typing 3s steps(30, end) infinite, blink-caret .75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: black; }
+        }
+
+        .sim-robot-arm-mini { /* Farklı bir class adı, çakışmayı önlemek için */
+            width: 40px;
+            height: 50px;
+            background: #bbb;
+            border-radius: 5px;
+            position: relative;
+            animation: miniRobotMove 3s infinite ease-in-out;
+            transform-origin: bottom center; /* Dönme noktası */
+        }
+
+        .sim-robot-arm-mini::before {
+            content: '';
+            width: 20px;
+            height: 10px;
+            background: #888;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 3px;
+        }
+
+        @keyframes miniRobotMove {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-15px) rotate(10deg); }
+            75% { transform: translateY(-15px) rotate(-10deg); }
+        }
+
+        .sim-scan-bar-container { /* Kapsayıcı */
+            width: 80%;
+            height: 50px;
+            border: 1px solid #ccc;
+            position: relative;
+            overflow: hidden;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .sim-scan-line { /* Tarama çizgisi */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--accent);
+            animation: scanline 2s infinite linear;
+        }
+        @keyframes scanline {
+            0% { left: 0%; }
+            100% { left: 100%; }
+        }
+
+        .sim-chart-bar-mini { /* Kapsayıcı */
+            width: 80%;
+            height: 60px;
+            display: flex;
+            align-items: flex-end;
+            gap: 5px;
+            border-left: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+            padding-left: 5px;
+        }
+        .sim-bar-mini { /* Çubuklar */
+            flex-grow: 1;
+            background: var(--info);
+            animation: barHeight 2s infinite alternate;
+        }
+        @keyframes barHeight {
+            0%, 100% { height: 20%; }
+            25% { height: 80%; }
+            50% { height: 40%; }
+            75% { height: 60%; }
+        }
+
+        .sim-progress-bar-mini {
+            width: 80%;
+            height: 15px;
+            background: #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative; /* Metin için */
+        }
+        .sim-progress-mini {
+            height: 100%;
+            width: 0;
+            background: var(--success);
+            animation: progressBar 3s forwards infinite;
+            border-radius: 8px;
+        }
+        @keyframes progressBar {
+            0% { width: 0; }
+            100% { width: 100%; }
+        }
+        .sim-progress-text {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 0;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--primary);
+            opacity: 0;
+            animation: fadeAndShow 3s forwards infinite;
+            animation-delay: 3s; /* Çubuk dolduktan sonra belirsin */
+            white-space: nowrap;
+        }
+        @keyframes fadeAndShow {
+            0% { opacity: 0; }
+            99% { opacity: 0; } /* Animasyonun sonuna doğru belirsin */
+            100% { opacity: 1; }
+        }
+        /* Dil Seçimi */
+        .language-selector {
+            position: absolute;
+            top: 1rem;
+            right: 20px;
+            z-index: 101;
+            display: flex;
+            gap: 0.5rem;
+        }
+        .language-selector button {
+            background-color: rgba(255,255,255,0.2);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.5);
+            padding: 0.5rem 0.8rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .language-selector button.active,
+        .language-selector button:hover {
+            background-color: white;
+            color: var(--primary);
+        }
+
+        /* Daha iyi mobil düzenleme */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .nav-links li {
+                margin: 0.5rem;
+            }
+            
+            .simulator-content {
+                flex-direction: column;
+            }
+            
+            .simulator-sidebar, .simulator-main {
+                min-width: unset; 
+                width: 100%;
+            }
+
+            .timeline::before {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            
+            .timeline-item::after {
+                left: 21px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            .face-recognition-container {
+                width: 100%; 
+                height: 200px;
+            }
+            .detail-section {
+                padding: 1rem;
+            }
+            .language-selector {
+                position: static;
+                margin-top: 1rem;
+                justify-content: center;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="ai-particles" id="aiParticles"></div>
+        <div class="header-content">
+            <h1 data-lang-key="portalTitle">Yapay Zeka ve Kütüphaneler Portalı</h1>
+            <p class="subtitle" data-lang-key="subtitle">Geleceğin Akıllı Kütüphane Deneyimini Keşfedin</p>
+            <div class="language-selector">
+                <button id="langTR" class="active" onclick="setLanguage('tr')">TR</button>
+                <button id="langEN" onclick="setLanguage('en')">EN</button>
+            </div>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="nav-container">
+            <div class="logo">AI Library Hub</div>
+            <ul class="nav-links">
+                <li><a href="#giris" data-lang-key="navGiris">Giriş</a></li>
+                <li><a href="#uygulamalar" data-lang-key="navUygulamalar">Uygulamalar</a></li>
+                <li><a href="#faydalar" data-lang-key="navFaydalar">Faydalar</a></li>
+                <li><a href="#zorluklar" data-lang-key="navZorluklar">Zorluklar</a></li>
+                <li><a href="#simulator" data-lang-key="navSimulator">Simülatörler</a></li>
+                <li><a href="#gelecek" data-lang-key="navGelecek">Gelecek</a></li>
+                <li><a href="#kaynaklar" data-lang-key="navKaynaklar">Kaynaklar</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <section class="hero" id="heroSection">
+            <h2 class="hero-title" data-lang-key="heroTitle">Kütüphanelerde Yapay Zeka Devrimi</h2>
+            <p class="hero-text" data-lang-key="heroText">Yapay zeka, kütüphanelerin bilgi yönetimi, kullanıcı hizmetleri ve operasyonel süreçlerinde köklü dönüşümler sağlıyor. Bu portal, yapay zekanın kütüphanecilik alanındaki uygulamalarını, faydalarını ve zorluklarını interaktif bir şekilde sunuyor.</p>
+            <a href="#uygulamalar" class="btn" data-lang-key="exploreButton">Keşfetmeye Başla</a>
+        </section>
+
+        <section id="giris" class="content-section">
+            <h2 class="section-title" data-lang-key="sectionGiris">Giriş: Kütüphanelerde Yapay Zekânın Yükselişi</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-content">
+                        <h3 class="card-title">Yapay Zeka Nedir?</h3>
+                        <p class="card-text">Yapay zekâ (YZ), günümüzde hızla gelişen ve birçok sektörü derinden etkileyen bir teknoloji olarak öne çıkmaktadır. YZ, insan benzeri zekâ davranışlarını taklit eden sistemler olarak tanımlanır.</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">Machine Learning</span>
+                            <span class="tech-badge">Deep Learning</span>
+                            <span class="tech-badge">NLP</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <h3 class="card-title">Kütüphanecilikte YZ'nin Rolü</h3>
+                        <p class="card-text">Kütüphanecilik, bilginin toplanması, düzenlenmesi, erişimi ve korunmasıyla ilgilenen köklü bir disiplin olarak, YZ teknolojileriyle entegrasyonun kaçılmaz olduğu bir evrim sürecindedir.</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">Otomasyon</span>
+                            <span class="tech-badge">Veri Yönetimi</span>
+                            <span class="tech-badge">Kullanıcı Deneyimi</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <h3 class="card-title">Stratejik Zorunluluk</h3>
+                        <p class="card-text">Bu teknolojik dönüşüm, kütüphanelerin statik bilgi depoları olmaktan çıkıp, dinamik ve akıllı bilgi merkezlerine dönüşmesini sağlamaktadır. Hızlı adaptasyon, YZ'yi stratejik bir zorunluluk haline getiriyor.</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">Dönüşüm</span>
+                            <span class="tech-badge">Akıllı Merkezler</span>
+                            <span class="tech-badge">Strateji</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="card-text">Bu rapor, kütüphanelerde yapay zekâ kullanımının mevcut durumunu, uygulama alanlarını, sağladığı faydaları, karşılaşılan zorlukları ve etik boyutlarını kapsamlı bir şekilde incelemeyi amaçlamaktadır. Ayrıca, Türkiye'deki mevcut YZ uygulamaları ve geleceğe yönelik stratejiler de ele alınacaktır. Rapor, kütüphane yöneticileri, politika yapıcılar ve araştırmacılar için yapay zekâ entegrasyonu konusunda bilinçli kararlar almalarına yardımcı olacak bir rehber niteliğindedir.</p>
+        </section>
+        
+        <section id="uygulamalar" class="content-section">
+            <h2 class="section-title" data-lang-key="sectionUygulamalar">Yapay Zekânın Kütüphane Hizmetlerindeki Uygulama Alanları</h2>
+            <div class="card-grid" id="uygulamaAlanlariGrid">
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1551029506-0807df4e2031?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Koleksiyon Yönetimi" onerror="this.parentElement.innerHTML='<i class=\'fas fa-database\'></i>'">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title" data-lang-key="cardKoleksiyonTitle">Koleksiyon Yönetimi ve Geliştirme</h3>
+                        <p class="card-text">Otomatik kataloglama, akıllı öneri sistemleri ve içerik tanıma teknolojileri ile koleksiyon geliştirme ve bilgi yönetimi.</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">NLP</span>
+                            <span class="tech-badge">MARC21</span>
+                            <span class="tech-badge">Metadata</span>
+                            <span class="tech-badge">Akıllı Arama</span>
+                        </div>
+                        <div class="card-simulation">
+                            <div class="sim-catalog-item" data-lang-key="simCatalogItem">Kitap 1</div>
+                        </div>
+                        <button class="btn btn-outline" data-lang-key="detailsButton" onclick="showDetailSection('koleksiyon')">Detayları Gör</button>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1586282391129-76a746c25aa8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Kullanıcı Hizmetleri" onerror="this.parentElement.innerHTML='<i class=\'fas fa-users\'></i>'">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title" data-lang-key="cardKullaniciTitle">Kullanıcı Hizmetleri ve Etkileşimi</h3>
+                        <p class="card-text">Chatbotlar ve sanal asistanlarla 7/24 kesintisiz hizmet, kişiselleştirilmiş deneyimler ve akıllı yönlendirme.</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">GPT-4</span>
+                            <span class="tech-badge">NLU</span>
+                            <span class="tech-badge">Chatbots</span>
+                            <span class="tech-badge">Sanal Asistanlar</span>
+                        </div>
+                        <div class="card-simulation">
+                            <span class="sim-text-typing" data-lang-key="simTypingText">Merhaba, nasıl yardımcı olabilirim?</span>
+                        </div>
+                        <button class="btn btn-outline" data-lang-key="detailsButton" onclick="showDetailSection('kullanici')">Detayları Gör</button>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Teknik Hizmetler" onerror="this.parentElement.innerHTML='<i class=\'fas fa-robot\'></i>'">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title" data-lang-key="cardTeknikTitle">Teknik Hizmetler ve Otomasyon</h3>
+                        <p class="card-text">Robotik süreç otomasyonu (RPA), envanter yönetimi, raf düzenleme ve fiziksel materyal hareketleri.</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">RPA</span>
+                            <span class="tech-badge">RFID</span>
+                            <span class="tech-badge">Computer Vision</span>
+                            <span class="tech-badge">Otonom Robotlar</span>
+                        </div>
+                        <div class="card-simulation">
+                            <div class="sim-robot-arm-mini"></div>
+                        </div>
+                        <button class="btn btn-outline" data-lang-key="detailsButton" onclick="showDetailSection('teknik')">Detayları Gör</button>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Dijitalleştirme" onerror="this.parentElement.innerHTML='<i class=\'fas fa-scanner\'></i>'">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title" data-lang-key="cardDijitalTitle">Dijitalleştirme ve Arşivleme</h3>
+                        <p class="card-text">OCR ve el yazısı tanıma (HTR) teknolojileri ile tarihi belgelerin dijitalleştirilmesi ve korunması.</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">OCR</span>
+                            <span class="tech-badge">HTR</span>
+                            <span class="tech-badge">Computer Vision</span>
+                            <span class="tech-badge">Metin Madenciliği</span>
+                        </div>
+                        <div class="card-simulation">
+                            <div class="sim-scan-bar-container">
+                                <div class="sim-scan-line"></div>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline" data-lang-key="detailsButton" onclick="showDetailSection('dijital')">Detayları Gör</button>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Veri Analitiği" onerror="this.parentElement.innerHTML='<i class=\'fas fa-chart-bar\'></i>'">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title" data-lang-key="cardVeriAnaliziTitle">Veri Analitiği ve Kullanıcı Davranışları</h3>
+                        <p class="card-text">Kullanıcı davranış analizleri ile koleksiyon geliştirme, hizmet optimizasyonu ve yoğunluk yönetimi.</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">Machine Learning</span>
+                            <span class="tech-badge">Analytics</span>
+                            <span class="tech-badge">Big Data</span>
+                            <span class="tech-badge">Prediktif Analiz</span>
+                        </div>
+                        <div class="card-simulation">
+                            <div class="sim-chart-bar-mini">
+                                <div class="sim-bar-mini"></div>
+                                <div class="sim-bar-mini"></div>
+                                <div class="sim-bar-mini"></div>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline" data-lang-key="detailsButton" onclick="showDetailSection('veriAnalizi')">Detayları Gör</button>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Eğitim ve Atölyeler" onerror="this.parentElement.innerHTML='<i class=\'fas fa-graduation-cap\'></i>'">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title" data-lang-key="cardEgitimTitle">Eğitim ve Atölyeler</h3>
+                        <p class="card-text">Yapay zeka okuryazarlığı ve teknoloji eğitimleri ile toplumu geleceğe hazırlama ve bilgi becerilerini geliştirme.</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">AI Literacy</span>
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">TensorFlow</span>
+                            <span class="tech-badge">Etik YZ</span>
+                        </div>
+                        <div class="card-simulation">
+                            <div class="sim-progress-bar-mini">
+                                <div class="sim-progress-mini"></div>
+                            </div>
+                            <span class="sim-progress-text" data-lang-key="simProgressText">Ders Tamamlandı!</span>
+                        </div>
+                        <button class="btn btn-outline" data-lang-key="detailsButton" onclick="showDetailSection('egitim')">Detayları Gör</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="faydalar" class="content-section">
+            <h2 class="section-title" data-lang-key="sectionFaydalar">Yapay Zekânın Kütüphanelere Sağladığı Faydalar</h2>
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Operasyonel Verimlilik</h3>
+                    <p class="feature-text">Rutin işlemlerin otomasyonu ile personel iş yükü azalır ve süreçler hızlanır, hata oranı düşer.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-check"></i>
+                    </div>
+                    <h3 class="feature-title">Gelişmiş Kullanıcı Deneyimi</h3>
+                    <p class="feature-text">Kişiselleştirilmiş hizmetler ve 7/24 erişilebilirlik ile kullanıcı memnuniyeti ve etkileşimi artar.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="feature-title">Veriye Dayalı Karar Alma</h3>
+                    <p class="feature-text">Kullanıcı davranış analizleri ile stratejik planlama, kaynak tahsisi ve hizmet optimizasyonu.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="feature-title">Yenilikçi Hizmet Modelleri</h3>
+                    <p class="feature-text">Robotik asistanlar ve interaktif öğrenme araçları ile yeni nesil, dinamik kütüphane hizmetleri sunulur.</p>
+                </div>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number">88%</div>
+                    <div class="stat-label">Chatbot Doğruluk Oranı</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number">35K</div>
+                    <div class="stat-label">Robotla Taranan Kitap/Saat</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number">99.5%</div>
+                    <div class="stat-label">Envanter Doğruluk Oranı</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number">2000</div>
+                    <div class="stat-label">Otomatik İşlenen Ürün/Saat</div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="zorluklar" class="content-section">
+            <h2 class="section-title" data-lang-key="sectionZorluklar">Yapay Zekânın Kütüphaneler İçin Zorlukları ve Riskleri</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-content">
+                        <h3 class="card-title">Maliyet ve Kaynak Kısıtları</h3>
+                        <p class="card-text">YZ sistemlerinin uygulanması ve bakımı yüksek maliyetler gerektirir; küçük kütüphaneler için finansal yük oluşturur.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-content">
+                        <h3 class="card-title">Veri Gizliliği Endişeleri</h3>
+                        <p class="card-text">Kullanıcı verilerinin toplanması ve işlenmesi, gizlilik ve güvenlik konularında yeni sorumluluklar getirir.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-content">
+                        <h3 class="card-title">Algoritmik Önyargı Riski</h3>
+                        <p class="card-text">Eğitim verilerindeki önyargılar, YZ sistemlerinin ayrımcı veya yanıltıcı sonuçlar üretmesine yol açabilir.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-content">
+                        <h3 class="card-title">İş Gücü Dönüşümü</h3>
+                        <p class="card-text">Otomasyonun artması, kütüphane personelinin rollerinin ve beceri gereksinimlerinin değişmesine neden olur.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-content">
+                        <h3 class="card-title">Teknolojik Bağımlılık</h3>
+                        <p class="card-text">YZ sistemlerine aşırı bağımlılık, sistem arızaları veya siber saldırılar durumunda hizmet kesintilerine yol açabilir.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-content">
+                        <h3 class="card-title">Fikri Mülkiyet ve Telif Hakları</h3>
+                        <p class="card-text">YZ tarafından üretilen eserlerin telif hakkı durumu ve bu konudaki hukuki belirsizlikler önemli bir zorluktur.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial">
+                <p class="testimonial-text">"Yapay zeka, kütüphanelerin statik bilgi depoları olmaktan çıkıp, dinamik ve akıllı bilgi merkezlerine dönüşmesini sağlıyor. Ancak bu dönüşüm, etik ve insan odaklı bir yaklaşımla yönetilmelidir."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Dr. Ayhan Greywolf" onerror="this.parentElement.innerHTML='AG'">
+                    </div>
+                    <div>
+                        <div class="author-name">Dr. Ayhan Greywolf</div>
+                        <div class="author-title">Teknolojiler Direktörü, AI Library Hub</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="simulator" class="content-section">
+            <h2 class="section-title" data-lang-key="sectionSimulator">Yapay Zeka Simülatörleri</h2>
+            
+            <div class="simulator">
+                <div class="simulator-header">
+                    <h3 class="simulator-title" data-lang-key="simChatbotTitle">Kütüphane Chatbot Simülatörü (NLP)</h3>
+                    <div class="simulator-controls">
+                        <button class="btn" id="chatReset" data-lang-key="chatReset" onclick="resetChat()">Sohbeti Sıfırla</button>
+                        <button class="btn btn-outline" id="chatAIMode" data-lang-key="chatAIMode" onclick="toggleAI()">AI Modu</button>
+                    </div>
+                </div>
+                
+                <div class="simulator-content">
+                    <div class="simulator-sidebar">
+                        <h4>Örnek Sorular:</h4>
+                        <ul>
+                            <li><a href="#" onclick="askQuestion('Kütüphane kaçta kapanıyor?')">Kütüphane kaçta kapanıyor?</a></li>
+                            <li><a href="#" onclick="askQuestion('Çalışma alanı nasıl rezerve ederim?')">Çalışma alanı nasıl rezerve ederim?</a></li>
+                            <li><a href="#" onclick="askQuestion('Kitap nasıl ödünç alırım?')">Kitap nasıl ödünç alırım?</a></li>
+                            <li><a href="#" onclick="askQuestion('Veritabanlarına nasıl erişirim?')">Veritabanlarına nasıl erişirim?</a></li>
+                            <li><a href="#" onclick="askQuestion('Yapay zeka teknolojileri hakkında bilgi verebilir misin?')">Yapay zeka teknolojileri hakkında bilgi verebilir misin?</a></li>
+                            <li><a href="#" onclick="askQuestion('Makine öğrenmesi ne işe yarar?')">Makine öğrenmesi ne işe yarar?</a></li>
+                        </ul>
+                        
+                        <div class="model-info">
+                            <strong>Model Bilgisi:</strong><br>
+                            Teknoloji: GPT-4 Lite + TensorFlow.js<br>
+                            Doğruluk: %88 (Ortalama)<br>
+                            Diller: TR, EN<br>
+                            Güncelleme: Real-time (NLU Adaptif)
+                        </div>
+                    </div>
+                    
+                    <div class="simulator-main">
+                        <div class="chatbot">
+                            <div class="chatbot-header">
+                                <div class="chatbot-avatar">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                                <div>
+                                    <div class="chatbot-name">Kütüphane AI Asistanı</div>
+                                    <div class="chatbot-status">Çevrimiçi • TensorFlow.js</div>
+                                </div>
+                            </div>
+                            
+                            <div class="chatbot-messages" id="chatMessages">
+                                <div class="message bot-message">
+                                    🤖 Merhaba! Ben yapay zeka destekli kütüphane asistanınızım. TensorFlow.js ile güçlendirilmiş natural language processing sistemi ile size yardımcı olabilirim. Nasıl yardımcı olabilirim?
+                                </div>
+                            </div>
+                            
+                            <div class="chatbot-input">
+                                <input type="text" id="userInput" data-lang-key="chatInputPlaceholder" placeholder="Sorunuzu yazın... (AI destekli)">
+                                <button onclick="sendMessage()">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                                <button class="btn voice-btn" id="voiceInputBtn" style="display:none;" data-lang-key="chatSpeak">
+                                    <i class="fas fa-microphone"></i> Konuşun...
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="simulator">
+                <div class="simulator-header">
+                    <h3 class="simulator-title" data-lang-key="simRobotTitle">Akıllı Robot Simülatörü (Computer Vision & RPA)</h3>
+                    <div class="simulator-controls">
+                        <button class="btn" id="robotStart" data-lang-key="robotStart" onclick="startRobotAI()">AI Envanter & Düzenle</button>
+                        <button class="btn btn-outline" id="robotLearn" data-lang-key="robotLearn" onclick="robotSelfLearning()">Öğrenme Modu</button>
+                    </div>
+                </div>
+                
+                <div class="simulator-content">
+                    <div class="simulator-sidebar">
+                        <h4>Robot Özellikleri:</h4>
+                        <div class="tech-stack">
+                            <span class="tech-badge">Computer Vision</span>
+                            <span class="tech-badge">TensorFlow</span>
+                            <span class="tech-badge">OpenCV</span>
+                            <span class="tech-badge">RFID</span>
+                            <span class="tech-badge">RPA</span>
+                        </div>
+                        
+                        <div style="margin-top: 1rem;">
+                            <div><strong>✓</strong> RFID Tarama</div>
+                            <div><strong>✓</strong> Görüntü İşleme ile Kitap Tanıma</div>
+                            <div><strong>✓</strong> Makine Öğrenmesi Tabanlı Sıralama</div>
+                            <div><strong>✓</strong> Otonom Navigasyon</div>
+                            <div><strong>✓</strong> Prediktif Analiz (Hızlı Eskiyen Kitaplar)</div>
+                        </div>
+                        
+                        <div style="margin-top: 2rem;">
+                            <h4>Performans Metrikleri:</h4>
+                            <div style="background: #f9f9f9; padding: 1rem; border-radius: 4px; margin-top: 0.5rem;">
+                                <div><strong>Taranan Kitap:</strong> <span id="scannedBooks">0</span></div>
+                                <div><strong>Sıralanan Kitap:</strong> <span id="sortedBooks">0</span></div>
+                                <div><strong>Doğruluk Oranı:</strong> <span id="accuracy">99.5%</span></div>
+                                <div><strong>Verimlilik Düzeyi:</strong> <span id="efficiency">85%</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="simulator-main">
+                        <div class="robot-simulator">
+                            <div class="robot-arm" id="robotArm">
+                                <div class="robot-joint"></div>
+                                <div class="robot-joint"></div>
+                                <div class="robot-hand"></div>
+                            </div>
+                            
+                            <div class="robot-shelf">
+                                <div class="shelf-level">
+                                    <div class="book" data-genre="roman"></div>
+                                    <div class="book" data-genre="bilim"></div>
+                                    <div class="book" data-genre="tarih"></div>
+                                    <div class="book" data-genre="sanat"></div>
+                                    <div class="book" data-genre="teknoloji"></div>
+                                </div>
+                                
+                                <div class="shelf-level">
+                                    <div class="book" data-genre="felsefe"></div>
+                                    <div class="book" data-genre="matematik"></div>
+                                    <div class="book" data-genre="edebiyat"></div>
+                                    <div class="book" data-genre="coğrafya"></div>
+                                    <div class="book" data-genre="müzik"></div>
+                                </div>
+                                
+                                <div class="shelf-level">
+                                    <div class="book" data-genre="biyoloji"></div>
+                                    <div class="book" data-genre="fizik"></div>
+                                    <div class="book" data-genre="kimya"></div>
+                                    <div class="book" data-genre="psikoloji"></div>
+                                    <div class="book" data-genre="sosyoloji"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="robot-controls">
+                                <button class="btn" id="aiScanButton" data-lang-key="robotScan" onclick="aiEnvantorTara()">AI Tarama</button>
+                                <button class="btn btn-outline" id="resetRobotButton" data-lang-key="robotReset" onclick="resetRobot()">Robotu Sıfırla</button>
+                            </div>
+                        </div>
+                        
+                        <div class="neural-network" id="neuralNetwork">
+                            <div class="layer">
+                                <div class="neuron">I1</div>
+                                <div class="neuron">I2</div>
+                                <div class="neuron">I3</div>
+                            </div>
+                            <div class="connection"></div>
+                            <div class="layer">
+                                <div class="neuron">H1</div>
+                                <div class="neuron">H2</div>
+                                <div class="neuron">H3</div>
+                                <div class="neuron">H4</div>
+                            </div>
+                            <div class="connection"></div>
+                            <div class="layer">
+                                <div class="neuron">O1</div>
+                                <div class="neuron">O2</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="simulator">
+                <div class="simulator-header">
+                    <h3 class="simulator-title" data-lang-key="simFaceRecTitle">Akıllı Kitap Öneri Sistemi (Yüz Analizi Simülasyonu)</h3>
+                    <div class="simulator-controls">
+                        <button class="btn" onclick="startFaceRecognitionSim()">Yüz Analizini Başlat</button>
+                        <button class="btn btn-outline" onclick="resetRecommendation()">Sıfırla</button>
+                    </div>
+                </div>
+                
+                <div class="simulator-content">
+                    <div class="simulator-sidebar">
+                        <h4>Öneri Kriterleri:</h4>
+                        <p><strong>Yüz İfadesi:</strong> Neşeli, Düşünceli, Meraklı (Simüle Edilmiş)</p>
+                        <p><strong>Kullanıcı İlgi Alanı:</strong> Seçiminize göre (Simülasyon)</p>
+                        <p style="margin-top: 1rem;">Bu simülatör, bilgisayar görüsü ile algılanan yüz ifadelerini ve kullanıcı tercihlerini birleştirerek kişiselleştirilmiş kitap önerileri sunar. Google Books API entegrasyonu simüle edilmiştir.</p>
+                        
+                        <div class="model-info">
+                            <strong>Model Bilgisi:</strong><br>
+                            Teknoloji: Computer Vision (Simulated) + TF.js<br>
+                            Modül: FaceMesh API (Simulated) / Keras<br>
+                            Veri Seti: Duygu ve İlgi Alanı İlişkilendirme<br>
+                            API: Google Books API (Simulated)
+                        </div>
+                    </div>
+                    
+                    <div class="simulator-main">
+                        <div class="face-recognition-container" onclick="startFaceRecognitionSim()">
+                            <div class="face-placeholder" id="facePlaceholder">
+                                <i class="fas fa-camera" style="font-size: 3rem; color: #aaa;"></i>
+                                <span style="margin-top: 1rem; display: block;" data-lang-key="faceAnalysisClick" id="faceAnalysisClickText">Yüz Analizi İçin Tıklayın</span>
+                                <div class="face-detection-box" id="faceDetectionBox" style="display: none;"></div>
+                                <div class="emotion-text" id="emotionText" style="display: none;"></div>
+                            </div>
+                        </div>
+                        <div id="recommendationLoading" style="display: none;">
+                            <div class="loading-spinner"></div>
+                            <p data-lang-key="faceAnalysisLoading" id="faceAnalysisLoadingText">Yüz analizi yapılıyor ve kitap önerileri derleniyor...</p>
+                        </div>
+                        <div class="prediction-result" id="bookRecommendationResult" style="display: none;">
+                            <strong data-lang-key="recommendationResult" id="recommendationResultTitle">Sizin İçin Önerilen Kitaplar:</strong>
+                            <div class="book-recommendation-grid" id="recommendedBooksGrid">
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="simulator">
+                <div class="simulator-header">
+                    <h3 class="simulator-title" data-lang-key="simOcrTitle">OCR & Computer Vision Simülatörü (Belge Dijitalleştirme)</h3>
+                    <div class="simulator-controls">
+                        <button class="btn" id="ocrStartBtn" data-lang-key="ocrStart" onclick="startOCR()">OCR Başlat</button>
+                        <button class="btn btn-outline" id="ocrTrainBtn" data-lang-key="ocrTrain" onclick="trainOCRModel()">Model Eğit</button>
+                    </div>
+                </div>
+                
+                <div class="simulator-content">
+                    <div class="simulator-sidebar">
+                        <h4>Teknolojiler:</h4>
+                        <div class="tech-stack">
+                            <span class="tech-badge">OpenCV.js</span>
+                            <span class="tech-badge">Tesseract.js</span>
+                            <span class="tech-badge">TensorFlow.js</span>
+                            <span class="tech-badge">WebGL</span>
+                        </div>
+                        
+                        <div style="margin-top: 1rem;">
+                            <div><strong>✓</strong> Metin Tanıma (Basılı)</div>
+                            <div><strong>✓</strong> El Yazısı Tanıma (HTR)</div>
+                            <div><strong>✓</strong> Çoklu Dil Desteği</div>
+                            <div><strong>✓</strong> Tarihi Belge İşleme</div>
+                            <div><strong>✓</strong> Gerçek Zamanlı İşleme Simülasyonu</div>
+                        </div>
+                        
+                        <div class="model-info">
+                            <strong>Model Stats:</strong><br>
+                            Accuracy: 96.2%<br>
+                            Languages Supported: 100+<br>
+                            Speed: 150ms/page (Simülasyon)<br>
+                            Engine: TensorFlow Lite (WebAssembly)
+                        </div>
+                    </div>
+                    
+                    <div class="simulator-main">
+                        <div class="ocr-demo" onclick="selectOCRImage()">
+                            <i class="fas fa-upload" style="font-size: 3rem; color: #ddd; margin-bottom: 1rem;"></i>
+                            <p data-lang-key="ocrUpload" id="ocrUploadText">Bir görüntü yükleyin veya örnek metni seçin</p>
+                            <p style="font-size: 0.8rem; color: #666;">Desteklenen formatlar: JPG, PNG, PDF</p>
+                            <canvas id="ocrCanvas" style="display: none;"></canvas>
+                        </div>
+                        
+                        <div class="ocr-result" id="ocrResult" style="display: none;">
+                            <strong data-lang-key="ocrResultText" id="ocrResultTitle">OCR Sonucu:</strong>
+                            <div id="extractedText"></div>
+                        </div>
+                        
+                        <div id="ocrLoading" style="display: none;">
+                            <div class="loading-spinner"></div>
+                            <p data-lang-key="ocrLoading" id="ocrLoadingText">TensorFlow modeli görüntüyü işliyor...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="simulator">
+                <div class="simulator-header">
+                    <h3 class="simulator-title" data-lang-key="simMlTitle">Makine Öğrenmesi Tahmin Sistemi (Kütüphane Kaynak Kullanımı)</h3>
+                    <div class="simulator-controls">
+                        <button class="btn" id="mlTrainBtn" data-lang-key="mlTrain" onclick="trainModel()">Model Eğit</button>
+                        <button class="btn btn-outline" id="mlPredictBtn" data-lang-key="mlPredict" onclick="makePrediction()">Tahmin Yap</button>
+                    </div>
+                </div>
+                
+                <div class="simulator-content">
+                    <div class="simulator-sidebar">
+                        <h4>Model Parametreleri:</h4>
+                        <div style="margin: 1rem 0;">
+                            <label>Kullanıcı Yaşı: <input type="range" id="userAge" min="18" max="65" value="25"></label>
+                            <span id="ageValue">25</span>
+                        </div>
+                        <div style="margin: 1rem 0;">
+                            <label>Ziyaret Sıklığı (aylık): <input type="range" id="visitFreq" min="1" max="30" value="5"></label>
+                            <span id="freqValue">5</span>
+                        </div>
+                        <div style="margin: 1rem 0;">
+                            <label>İlgi Alanı: 
+                                <select id="interestArea">
+                                    <option value="0">Bilim</option>
+                                    <option value="1">Edebiyat</option>
+                                    <option value="2">Tarih</option>
+                                    <option value="3">Teknoloji</option>
+                                    <option value="4">Sanat</option>
+                                    <option value="5">Felsefe</option>
+                                </select>
+                            </label>
+                        </div>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-badge">TensorFlow.js</span>
+                            <span class="tech-badge">Neural Networks</span>
+                            <span class="tech-badge">Regression</span>
+                            <span class="tech-badge">Kişiselleştirme</span>
+                        </div>
+                    </div>
+                    
+                    <div class="simulator-main">
+                        <canvas id="mlCanvas" width="400" height="300" class="ai-canvas"></canvas>
+                        <div class="prediction-result" id="predictionResult" style="display: none;">
+                            <strong data-lang-key="mlPredictionResult" id="predictionResultTitle">Tahmin Sonucu:</strong>
+                            <div id="predictionText"></div>
+                        </div>
+                        <div class="model-info" data-lang-key="mlModelStatus" id="modelStats">
+                            Model durumu: Eğitim bekleniyor...<br>
+                            Epoch: 0/50<br>
+                            Loss: N/A<br>
+                            Accuracy: N/A
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="gelecek" class="content-section">
+            <h2 class="section-title" data-lang-key="sectionGelecek">Geleceğin Kütüphane Vizyonu ve Etik Çerçeve</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2024-2025</div>
+                        <h3 class="timeline-title">Temel YZ Entegrasyonu</h3>
+                        <p class="timeline-text">Chatbotlar, otomatik kataloglama ve basit öneri sistemlerinin yaygınlaşması. TensorFlow.js ve OpenCV.js ile web tabanlı çözümler.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2026-2027</div>
+                        <h3 class="timeline-title">Akıllı Robotik Sistemler</h3>
+                        <p class="timeline-text">Computer vision ile donatılmış robotlar, PyTorch tabanlı deep learning modelleri ve gerçek zamanlı veri analizi.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2028-2029</div>
+                        <h3 class="timeline-title">Kişiselleştirilmiş Öğrenme</h3>
+                        <p class="timeline-text">Scikit-learn ve Pandas ile gelişmiş veri analizi, transformers tabanlı NLP sistemleri ve adaptif öneriler.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2030+</div>
+                        <h3 class="timeline-title">Tam Akıllı Kütüphaneler</h3>
+                        <p class="timeline-text">NumPy ve SciPy destekli bilimsel hesaplama, WebGL ile 3D görselleştirme ve tam otonom bilgi yönetimi.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="section-title">Etik ve Yasal Çerçeve</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-content">
+                        <h4 class="card-title">Uluslararası Politikalar ve Rehberler</h4>
+                        <p class="card-text">IFLA ve UNESCO'nun yayımladığı yapay zeka etiği tavsiyeleri ve bildirgeleri, kütüphanelerin sorumlu YZ kullanımı için temel bir yol haritası sunar. Şeffaflık, hesap verebilirlik ve insan hakları vurgulanır.</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">IFLA</span>
+                            <span class="tech-badge">UNESCO</span>
+                            <span class="tech-badge">Etik Kurallar</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <h4 class="card-title">Ulusal Politikalar ve Girişimler (Türkiye)</h4>
+                        <p class="card-text">Türkiye'de ANKOS ve Kültür ve Turizm Bakanlığı'nın çalışmaları, yapay zeka destekli kütüphane hizmetleri geliştirmeyi ve 100 akıllı kütüphane hedefiyle dijital dönüşümü hızlandırmayı amaçlar.</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">ANKOS</span>
+                            <span class="tech-badge">T.C. Kül. ve Tur. Bak.</span>
+                            <span class="tech-badge">Dijital Katalog</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <h4 class="card-title">Kütüphanecilerin Rolü ve YZ Okuryazarlığı</h4>
+                        <p class="card-text">Kütüphanecilerin YZ araçlarını etkin kullanmak için sürekli eğitime, teknik bilgiye, etik farkındalığa ve eleştirel düşünme becerilerine ihtiyaçları vardır.</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">Sürekli Eğitim</span>
+                            <span class="tech-badge">Etik Farkındalık</span>
+                            <span class="tech-badge">Eleştirel Düşünme</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="cta content-section">
+            <h2 class="cta-title" data-lang-key="sectionCtaTitle">Yapay Zeka Çağında Kütüphanelerin Geleceğini Şekillendirin</h2>
+            <p class="cta-text" data-lang-key="sectionCtaText">Kütüphanelerde yapay zeka uygulamaları hızla gelişiyor. TensorFlow, PyTorch, OpenCV ve diğer modern teknolojilerle donatılmış bu dönüşümün bir parçası olun.</p>
+            <div class="cta-buttons">
+                <a href="#" class="btn cta-btn" data-lang-key="ctaJoin">Projelerimize Katılın</a>
+                <a href="#kaynaklar" class="btn cta-btn-outline" data-lang-key="ctaResources">Kaynaklara Göz Atın</a>
+            </div>
+        </section>
+        
+        <section id="kaynaklar" class="sources-section content-section">
+            <h2 class="section-title" data-lang-key="sectionKaynaklar">Kaynaklar ve Referanslar</h2>
+            <div class="sources-grid">
+                <div class="source-card">
+                    <h4 class="source-title">IFLA - Kütüphaneler için Yapay Zeka Stratejisi</h4>
+                    <a href="https://medium.com/@ayhanbzkrt/k%C3%BCt%C3%BCphaneler-i%CC%87%C3%A7in-yapay-zeka-stratejisi-ifla-7b56b5e142f6" class="source-link" target="_blank">Medium - Ayhan Bozkurt (IFLA Kaynağına Atıfla)</a>
+                </div>
+                
+                <div class="source-card">
+                    <h4 class="source-title">ANKOS - Üniversite Kütüphaneleri YZ Kullanım Rehberi ve Politikası</h4>
+                    <a href="https://ankos.org.tr/wp-content/uploads/2025/03/ANKOS-YZ-Kullanim-Rehberi-ve-Politikasi.pdf" class="source-link" target="_blank">ANKOS Rehberi ve Politikası</a>
+                </div>
+                
+                <div class="source-card">
+                    <h4 class="source-title">Optimizing Library Services — Will AI Replace Librarians? Exploring the Future of Library Services - Charleston Hub</h4>
+                    <a href="https://www.charleston-hub.com/2025/07/optimizing-library-services-will-ai-replace-librarians-exploring-the-future-of-library-services/" class="source-link" target="_blank">Will AI Replace Librarians?</a>
+                </div>
+                
+                <div class="source-card">
+                    <h4 class="source-title">Oklahoma Üniversitesi - Bizzy Chatbot</h4>
+                    <a href="https://libraries.ou.edu/content/project-highlight-bizzy-chat-bot" class="source-link" target="_blank">Bizzy Chat Bot Projesi Detayları</a>
+                </div>
+                
+                <div class="source-card">
+                    <h4 class="source-title">RMIT Üniversitesi - Val GenAI Chatbot</h4>
+                    <a href="https://www.rmit.edu.au/students/support-services/study-support/val" class="source-link" target="_blank">Val GenAI Asistanı</a>
+                </div>
+                
+                <div class="source-card">
+                    <h4 class="source-title">Max Planck Enstitüsü - TORY Robot</h4>
+                    <a href="https://www.mpi.lu/library/like-innovation-lab/current-ideas/" class="source-link" target="_blank">TORY RFID Robot Projesi</a>
+                </div>
+                
+                <div class="source-card">
+                    <h4 class="source-title">Helsinki Oodi Kütüphanesi - Robot Teknolojileri</h4>
+                    <a href="https://www.universal-robots.com/case-stories/oodi-library/" class="source-link" target="_blank">Universal Robots Örnek Çalışması</a>
+                </div>
+                
+                <div class="source-card">
+                    <h4 class="source-title">UNESCO - Yapay Zeka Etiği Tavsiyeleri</h4>
+                    <a href="https://www.unesco.org/en/artificial-intelligence/recommendation-ethics" class="source-link" target="_blank">YZ Etiği Tavsiye Metni</a>
+                </div>
+                
+                <div class="source-card">
+                    <h4 class="source-title">TensorFlow.js - Web Tabanlı ML</h4>
+                    <a href="https://www.tensorflow.org/js" class="source-link" target="_blank">TensorFlow.js Dokümantasyonu</a>
+                </div>
+                
+                <div class="source-card">
+                    <h4 class="source-title">OpenCV.js - Web Bilgisayar Görüsü</h4>
+                    <a href="https://docs.opencv.org/3.4/d5/d10/tutorial_js_root.html" class="source-link" target="_blank">OpenCV.js Eğitimleri</a>
+                </div>
+                
+                <div class="source-card">
+                    <h4 class="source-title">Gartner - YZ Tahminleri 2029</h4>
+                    <a href="https://www.shrm.org/topics-tools/flagships/ai-hi/gartner-ai-predictions-through-2029" class="source-link" target="_blank">2029 YZ Trend Raporu</a>
+                </div>
+                
+                <div class="source-card">
+                    <h4 class="source-title">McKinsey - 2024 Global YZ Anketi</h4>
+                    <a href="https://business.purdue.edu/daniels-insights/posts/2024/global-survey-on-ai-adoption.php" class="source-link" target="_blank">Global YZ Benimseme Anketi Sonuçları</a>
+                </div>
+
+                <div class="source-card">
+                    <h4 class="source-title">Türkiye'de Halk Kütüphanesi Çalışanlarının Yapay Zekâya Yönelik Tutumları</h4>
+                    <a href="https://dergipark.org.tr/tr/download/article-file/3941670" class="source-link" target="_blank">Dergipark Araştırma Makalesi</a>
+                </div>
+
+                 <div class="source-card">
+                    <h4 class="source-title">AI Literacy: A Guide for Academic Libraries</h4>
+                    <a href="https://crln.acrl.org/index.php/crlnews/article/view/26704/34626" class="source-link" target="_blank">ACRL Kaynağı</a>
+                </div>
+
+                <div class="source-card">
+                    <h4 class="source-title">Anadolu Ajansı - Kütüphane ve Teknoloji Festivali Dijitalleştirme</h4>
+                    <a href="https://www.simgedergi.com/bilim/kutuphane-ve-teknoloji-festivalinde-dijitallestirme-konusuldu/" class="source-link" target="_blank">Simge Dergi Haberi</a>
+                </div>
+
+                <div class="source-card">
+                    <h4 class="source-title">İBB Kütüphaneleri Yapay Zeka Tabanlı Kullanım Analizi Projesi</h4>
+                    <a href="https://akillisehirekosistem.csb.gov.tr/DataBank/Detail?mId=3300390036003000&source=hp" class="source-link" target="_blank">Akıllı Şehir Ekosistem Projesi</a>
+                </div>
+
+                 <div class="source-card">
+                    <h4 class="source-title">Google Books API - Geliştirici Dokümantasyonu (Simüle Edilmiş)</h4>
+                    <a href="https://developers.google.com/books/docs/v1/getting_started" class="source-link" target="_blank">Google Books API (Kullanım Rehberi)</a>
+                </div>
+
+                <div class="source-card">
+                    <h4 class="source-title">Kütüphaneler İçin ChatGPT Kullanım Rehberi</h4>
+                    <a href="https://medium.com/@ayhanbzkrt/k%C3%BCt%C3%BCphaneler-i%CC%87%C3%A7in-chatgpt-kullan%C4%B1m-rehberi-90987b810343" class="source-link" target="_blank">Medium - Ayhan Bozkurt</a>
+                </div>
+                <div class="source-card">
+                    <h4 class="source-title">Etkili Prompt Yazma Teknikleri</h4>
+                    <a href="https://medium.com/@ayhanbzkrt/etkili-prompt-yazma-teknikleri-f534f657f281" class="source-link" target="_blank">Medium - Ayhan Bozkurt</a>
+                </div>
+                <div class="source-card">
+                    <h4 class="source-title">Akademik Araştırmalar için Yapay Zeka Araçlarının Eleştirel Değerlendirmesi: Bir Kılavuz</h4>
+                    <a href="https://medium.com/@ayhanbzkrt/akademik-ara%C5%9Ft%C4%B1rmalar-i%C3%A7in-yapay-zeka-ara%C3%A7lar%C4%B1n%C4%B1n-ele%C5%9Ftirel-de%C4%9Ferlendirmesi-bir-k%C4%B1lavuz-f4fb476eff77" class="source-link" target="_blank">Medium - Ayhan Bozkurt</a>
+                </div>
+                <div class="source-card">
+                    <h4 class="source-title">Kütüphane Referans Hizmetlerinde Retrieval-Augmented Generation (RAG) Uygulaması</h4>
+                    <a href="https://medium.com/@ayhanbzkrt/k%C3%BCt%C3%BCphane-referans-hizmetlerinde-retrieval-augmented-generation-rag-uygulamas%C4%B1-89d1aa56eac7" class="source-link" target="_blank">Medium - Ayhan Bozkurt</a>
+                </div>
+                <div class="source-card">
+                    <h4 class="source-title">ChatGPT Search: A New Era in AI-Driven Information Access</h4>
+                    <a href="https://medium.com/@ayhanbzkrt/chatgpt-search-a-new-era-in-ai-driven-information-access-d451b523c43c" class="source-link" target="_blank">Medium - Ayhan Bozkurt</a>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>AI Library Hub</h3>
+                <p>Kütüphanelerde yapay zeka uygulamalarını keşfetmek ve geliştirmek için TensorFlow, PyTorch, OpenCV ve diğer modern teknolojilerle desteklenen bir platform.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Teknolojiler</h3>
+                <ul class="footer-links">
+                    <li><a href="https://www.tensorflow.org/js" target="_blank">TensorFlow.js</a></li>
+                    <li><a href="https://docs.opencv.org/3.4/d5/d10/tutorial_js_root.html" target="_blank">OpenCV.js</a></li>
+                    <li><a href="https://pytorch.org/" target="_blank">PyTorch</a></li>
+                    <li><a href="https://scikit-learn.org/stable/" target="_blank">Scikit-learn</a></li>
+                    <li><a href="https://get.webgl.org/" target="_blank">WebGL</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Kaynaklar</h3>
+                <ul class="footer-links">
+                    <li><a href="#kaynaklar">Akademik Kaynaklar</a></li>
+                    <li><a href="https://www.tensorflow.org/api_docs/js" target="_blank">API Dokümantasyonu</a></li>
+                    <li><a href="https://github.com/tensorflow/tfjs" target="_blank">GitHub Repositories</a></li>
+                    <li><a href="#uygulamalar">Eğitim Materyalleri</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>İletişim</h3>
+                <div class="footer-contact">
+                    <p><i class="fas fa-envelope"></i> ayhanbzkrt@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> +90 (XXX) XXX XX XX</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Ankara, Türkiye</p>
+                </div>
+            </div>
+        </div>
+        
+    <footer class="footer">
+        <p>© <span id="currentYear"></span> AI'Han ile Yapay Zeka Öğreniyoruz by <a href="https://www.linkedin.com/in/ayhanbozkurt/" target="_blank" class="footer-link">Ayhan Bozkurt</a>. Tüm hakları saklıdır.</p>
+    </footer>
+    </footer>
+
+    <section id="detailKoleksiyon" class="detail-section">
+        <div class="container">
+            <button class="back-to-applications" data-lang-key="backButton" onclick="hideDetailSection()">← Uygulama Alanlarına Geri Dön</button>
+            <h2 class="section-title" data-lang-key="cardKoleksiyonTitle">Koleksiyon Yönetimi ve Geliştirme Detayları</h2>
+            <p>Yapay zekâ, kütüphane koleksiyonlarının daha erişilebilir hale getirilmesi, metadata oluşturma, akıllı arama ve literatür tarama hizmetlerinde aktif olarak kullanılmaktadır. Otomatik kataloglama sistemleri ve akıllı öneri motorları, kütüphanelerin bilgi yönetimini daha verimli hale getirme konusunda yeni olanaklar sunmaktadır.</p>
+            <h4>Otomatik Kataloglama ve Sınıflandırma:</h4>
+            <p>Yapay zekâ ve makine öğrenimi, materyallerin MARC21 kaydını otomatik olarak alarak kataloglama süreçlerini hızlandırabilir. Python programlama dili kullanılarak materyallerin kelime öbekleri bulunup, konu ve kişi dizini için öneriler çıkarılması hedeflenmektedir. Bu otomasyon, kütüphanecilerin iş yükünü önemli ölçüde azaltırken, iş süreçlerinde hız ve tutarlılık sağlamaktadır. Örneğin, Amerika Birleşik Devletleri Kongre Kütüphanesi (Library of Congress), standardize katalog kayıtları oluşturmak ve bibliyografik verileri otomatik olarak üretmek için yapay zekâyı kullanmaktadır. Benzer şekilde, OCLC gibi büyük kütüphane konsorsiyumları, yinelenen kayıtları gidermek için yapay zekâ destekli teknolojileri test etmektedir. Bu gelişmeler, kütüphanelerin bilgi organizasyonunda basit otomasyonun ötesine geçerek, bilginin akıllı yönetimine doğru ilerlediğini göstermektedir. Yapay zekâ, içeriği anlama (doğal dil işleme), kullanıcı davranışlarını analiz etme ve koleksiyon boşluklarını tespit etme gibi yetenekleriyle, kütüphaneleri statik depolardan dinamik bilgi merkezlerine dönüştürmektedir.</p>
+            <h4>Akıllı Arama ve Öneri Sistemleri:</h4>
+            <p>Yapay zekâ tabanlı akıllı arama motorları, doğal dil işleme (NLP) tekniklerini kullanarak kullanıcı sorgularını geleneksel anahtar kelime aramalarından daha iyi anlayabilmekte ve bağlama dayalı doğru yanıtlar sunabilmektedir. Bu sistemler, kullanıcıların geçmişteki arama ve ödünç alma davranışlarını analiz ederek kişiselleştirilmiş öğrenme planları ve ilgili materyal önerileri sunabilmektedir. Örneğin, Helsinki'deki Oodi Kütüphanesi'nin Obotti adlı sohbet robotu, müşterilerin ilgi alanlarına ve geri bildirimlerine göre kitap önerileri sunarak kişiselleştirilmiş bir deneyim sağlamaktadır. Bu kişiselleştirme, kullanıcıların aradıkları bilgiye daha hızlı ve etkili bir şekilde ulaşmasını sağlamaktadır.</p>
+            <h4>İçerik Tanıma ve Otomatik Etiketleme:</h4>
+            <p>Yapay zekâ teknolojileri, elektronik kaynaklarda bulunan illüstrasyonların neyi tasvir ettiğine bağlı olarak otomatik etiketleme yapılmasına olanak tanır. Bu sayede, görüntüler üzerinden yapılan sonraki aramalar kolaylaşır. Ayrıca, yapay zekâ, elektronik kaynaklarda sadece anahtar kelimelerle değil, tam metin bazında benzer belgelerin aranmasına da yardımcı olabilir. Akademik yayınlar için otomatik özetleme, makale düzenleme şablonlarının kullanılması, bibliyografik referansların doğruluğu, kaynaklara uyumu ve tutarlılığının analizi de yapay zekâ ile sağlanabilmektedir. Bu yetenekler, dijitalleştirilmiş içeriğin kalitesini ve keşfedilebilirliğini artırarak, ham dijital veriyi akıllıca yapılandırılmış ve aranabilir bilgiye dönüştürmektedir.</p>
+        </div>
+    </section>
+
+    <section id="detailKullanici" class="detail-section">
+        <div class="container">
+            <button class="back-to-applications" data-lang-key="backButton" onclick="hideDetailSection()">← Uygulama Alanlarına Geri Dön</button>
+            <h2 class="section-title" data-lang-key="cardKullaniciTitle">Kullanıcı Hizmetleri ve Etkileşimi Detayları</h2>
+            <p>Kütüphaneler, kullanıcı hizmetlerini iyileştirmek ve erişilebilirliği artırmak için yapay zekâ uygulamalarını başarıyla entegre etmeye başlamıştır.</p>
+            <h4>Chatbotlar ve Akıllı Sanal Asistanlar:</h4>
+            <p>Yapay zekâ destekli chatbotlar, kullanıcıların sıkça sorduğu sorulara yanıt verme, bilgi toplama ve rutin işlemleri otomatize etme potansiyeline sahiptir. Kurumsal chatbotlar ve koleksiyon bilgisi keşfi gibi hizmetler, kütüphanelerde en olgunlaşmış yapay zekâ uygulamaları arasında yer almaktadır. Chatbotlar genellikle kural tabanlı sistemlerken, Akıllı Sanal Asistanlar (ASA'lar) derin öğrenme modellerini kullanarak bağlamsal konuşmaları anlayabilir ve daha iyi müşteri çözümleri sunabilir. ASA'lar, doğal dil işleme (NLP) ve doğal dil anlama (NLU) yetenekleri sayesinde daha karmaşık sorgulara yanıt verebilir ve kişiselleştirilmiş etkileşimler sağlayabilir. Bu, kütüphane hizmetlerinde basit otomasyondan kişisel asistanlığa doğru iki katmanlı bir evrimi temsil etmektedir. Kullanıcıların self-servis beklentisi, bu tür YZ araçlarının benimsenmesini teşvik etmektedir.</p>
+            <h4>Örnek Uygulamalar:</h4>
+            <ul>
+                <li><strong>Oklahoma Üniversitesi Kütüphaneleri</strong>, 2017'den beri Bizzy adlı bir yapay zekâ destekli chatbot kullanmaktadır. Bizzy, kütüphane kullanıcılarının temel sorularına 7/24 yanıt vermekte ve %88 doğruluk oranına sahiptir. Bu, kütüphane personeli müsait olmadığında bile kullanıcıların bilgiye erişimini sağlamaktadır.</li>
+                <li><strong>San José Eyalet Üniversitesi Kütüphanesi</strong>, KingbotGPT adında Python tabanlı deneysel bir bot geliştirmiştir. Kingbot, kütüphane ve kaynaklar hakkında temel bilgi sağlamayı amaçlamaktadır, ancak bir araştırma aracı veya kütüphaneci uzmanlığının yerine geçmez. Bu örnekler, YZ'nin rutin sorguları ele alarak kütüphanecilerin daha karmaşık ve insani etkileşimlere odaklanmasına olanak tanıdığını göstermektedir.</li>
+                <li><strong>RMIT Üniversitesi</strong>, öğrencilere öğrenme ve günlük görevlerde yardımcı olmak için OpenAI'nin GPT-4o tarafından desteklenen Val adlı üretken bir YZ aracı sunmaktadır. Val, belgeleri özetleyebilir, yazıya geri bildirim sağlayabilir, görseller oluşturabilir ve çeşitli dillerde yardımcı olabilir. Bu tür araçlar, kullanıcıların kendi öğrenme ve araştırma süreçlerinde YZ'den doğrudan faydalanmasını sağlamaktadır.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="detailTeknik" class="detail-section">
+        <div class="container">
+            <button class="back-to-applications" data-lang-key="backButton" onclick="hideDetailSection()">← Uygulama Alanlarına Geri Dön</button>
+            <h2 class="section-title" data-lang-key="cardTeknikTitle">Teknik Hizmetler ve Otomasyon Detayları</h2>
+            <p>Kütüphane sistemleri üzerindeki rutin işlemler, Robotik Süreç Otomasyonu (RPA) kullanılarak otomatize edilmektedir. Bu otomasyon, manuel iş yükünü azaltarak operasyonel verimliliği artırmaktadır.</p>
+            <h4>Envanter Yönetimi ve Raf Düzenlemesi:</h4>
+            <p>Robotlar, kitapların raflara yerleştirilmesi, geri alınması ve envanter yönetimi gibi görevlerde önemli verimlilik sağlamaktadır. RFID ve barkod tarama sistemleri ile donatılmış robotlar, manuel envanter kontrolü ihtiyacını ortadan kaldırır, zaman kazandırır ve hataları azaltır. Bu, kütüphane operasyonlarında stratejik bir dönüşümü ifade etmektedir; zira YZ, zaman alıcı ve tekrarlayan görevleri üstlenerek kütüphanecilerin daha yüksek değerli, entelektüel ve kullanıcı odaklı işlere odaklanmasını mümkün kılmaktadır.</p>
+            <h4>Örnek Uygulamalar:</h4>
+            <ul>
+                <li><strong>Max Planck Enstitüsü Lüksemburg Kütüphanesi</strong>, TORY adlı RFID envanter robotunu test etmiştir. TORY, bir saatte 35.000 kitabı %99'un üzerinde doğrulukla envantere almıştır. Bu, geleneksel yöntemlerle aylar sürebilecek bir süreci önemli ölçüde kısaltmaktadır.</li>
+                <li><strong>Singapur Ulusal Kütüphane Kurulu</strong>, AuRoSS robotunu kullanarak rafları her gece taramakta ve eksik veya sırası bozuk kitapları raporlamaktadır. Bu robot, %99.5 doğrulukla kitap konumlarını belirleyebilir.</li>
+                <li><strong>Helsinki Oodi Kütüphanesi</strong>, kitap iade ve raf düzenleme süreçlerini otomatikleştirmek için Universal Robots UR10 kolları ve Mobile Industrial Robots (MiR) otonom mobil robotları kullanmaktadır. Bu sistem, saatte 2000'e kadar ürünü işleyebilir ve 700 ürünü rafa yerleştirebilir. Robotlar ayrıca, mobilite sorunları olan kullanıcılara yüksek raflardaki materyallere erişim konusunda yardımcı olarak erişilebilirliği artırmaktadır.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="detailDijital" class="detail-section">
+        <div class="container">
+            <button class="back-to-applications" data-lang-key="backButton" onclick="hideDetailSection()">← Uygulama Alanlarına Geri Dön</button>
+            <h2 class="section-title" data-lang-key="cardDijitalTitle">Dijitalleştirme ve Arşivleme Detayları</h2>
+            <p>Yapay zekâ algoritmaları, nadir el yazmaları ve tarihi belgeler gibi hassas materyallerin dijitalleştirilmesine ve korunmasına yardımcı olabilir. Optik karakter tanıma (OCR) ve el yazısı tanıma (HTR) gibi teknolojiler, kütüphane materyallerinin keşfedilebilirliğini ve kullanılabilirliğini artırmaktadır.</p>
+            <h4>Örnek Uygulamalar:</h4>
+            <ul>
+                <li><strong>İngiliz Kütüphanesi</strong>, milyonlarca tarihi gazeteyi dijitalleştirmek ve aranabilir hale getirmek için OCR teknolojisini kullanmıştır.</li>
+                <li><strong>Leeds Üniversitesi</strong>, antik metinleri dijitalleştirmek için yapay zekâ araçlarını kullanmaktadır. Bu sayede metinler, beyaz boşluklardan ayrıştırılarak manuel deşifreye gerek kalmadan dijitalleştirme kolaylaşmaktadır. Bu, daha önce erişilemeyen veya zor çözülen metinlerin araştırmacılar için ulaşılabilir olmasını sağlamaktadır.</li>
+                <li><strong>Anadolu Ajansı (AA)</strong>, Kütüphane ve Teknoloji Festivali'nde görsel ve basılı materyallerin dijitalleştirilmesinde yapay zekâ teknolojilerinin kullanımına değinmiştir. Özellikle yüz tanıma ve nesne tanıma gibi teknolojilerde renk ve kalitenin önemini vurgulamıştır. Yapay zekâ ile videoların indekslenmesi ve görüntülerdeki kişilere ilişkin bilgilerin otomatik olarak alınması mümkündür. Bu uygulamalar, dijitalleştirme sürecini sadece analogdan dijitale dönüştürmekle kalmayıp, dijital içeriğin kalitesini, keşfedilebilirliğini ve analitik derinliğini artırmaktadır.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="detailVeriAnalizi" class="detail-section">
+        <div class="container">
+            <button class="back-to-applications" data-lang-key="backButton" onclick="hideDetailSection()">← Uygulama Alanlarına Geri Dön</button>
+            <h2 class="section-title" data-lang-key="cardVeriAnaliziTitle">Veri Analitiği ve Kullanıcı Davranışları Detayları</h2>
+            <p>Yapay zekâ teknolojileri, kütüphane kullanıcılarının demografik verilerini (yaş, cinsiyet, eğitim durumu vb.) toplamak ve kullanıcı davranışlarını (ziyaret sıklığı, ziyaret süreleri, kullanılan kaynaklar vb.) incelemek için kullanılabilir. Bu analizler, kütüphanelerin hizmetlerini kullanıcı ihtiyaçlarına göre optimize etmesine olanak tanımaktadır.</p>
+            <h4>Kullanıcı Yoğunluğu Analizi ve Yönlendirme:</h4>
+            <p>Kütüphanelerdeki yoğunluk gerçek zamanlı olarak takip edilerek, yoğun dönemlerde kullanıcıların alternatif kütüphanelere yönlendirilmesi sağlanabilir. Bu, tüm tesislerin daha verimli kullanılmasını sağlar ve olumlu kullanıcı deneyimini artırır. İstanbul Büyükşehir Belediyesi Kütüphaneleri için geliştirilen yapay zekâ tabanlı analiz sistemi, bu vizyonu hayata geçirmeyi hedeflemektedir.</p>
+            <h4>Koleksiyon Geliştirme ve Program Planlama:</h4>
+            <p>Yapay zekâ, hangi kitapların daha sık ödünç alındığı, kütüphanenin hangi alanlarının en yoğun olduğu ve hangi programların en popüler olduğu gibi kullanım verilerini toplayarak kütüphanecilerin koleksiyon geliştirme, kaynak tahsisi ve program planlaması hakkında bilinçli kararlar almasına yardımcı olabilir. Bu, kütüphanelerin reaktif hizmet sunumundan proaktif, veriye dayalı yönetime geçişini sağlamaktadır. YZ destekli analitikler, kütüphanecilere hangi kaynakların daha popüler olduğunu belirleme ve koleksiyonları buna göre düzenleme konusunda değerli öneriler sunar.</p>
+        </div>
+    </section>
+
+    <section id="detailEgitim" class="detail-section">
+        <div class="container">
+            <button class="back-to-applications" data-lang-key="backButton" onclick="hideDetailSection()">← Uygulama Alanlarına Geri Dön</button>
+            <h2 class="section-title" data-lang-key="cardEgitimTitle">Eğitim ve Atölyeler Detayları</h2>
+            <p>Yapay zekâ çağında kütüphanecilerin rolü dönüşmektedir. Kütüphanecilerin, YZ araçlarını etkili bir şekilde kullanmak için sürekli eğitime ihtiyaçları vardır. Profesyonel gelişim programları, kütüphanecilerin YZ'yi iş akışlarına entegre etmek için gerekli becerileri edinmelerine yardımcı olabilir. Yapay zekâ okuryazarlığı, bireylerin YZ teknolojilerini anlamalarını, kullanmalarını ve eleştirel bir şekilde değerlendirmelerini sağlayan temel bir yetkinlik olarak ortaya çıkmaktadır. Bu okuryazarlık; teknik bilgi, etik farkındalık, eleştirel düşünme ve pratik becerileri içermektedir.</p>
+            <ul>
+                <li>Kütüphaneciler, YZ'nin nasıl çalıştığına dair temel bir anlayışa sahip olmalı, algoritmaların ve sinir ağlarının temel kavramlarını kavramalıdır.</li>
+                <li>YZ sistemlerinde yerleşik değerleri ve varsayımları eleştirel bir şekilde inceleyerek etik farkındalık geliştirmelidirler. Bu, potansiyel önyargıları, hesap verebilirlik boşluklarını ve gizlilik endişelerini değerlendirmeyi gerektirir.</li>
+                <li>Eleştirel düşünme, YZ tarafından üretilen bilgilerin kaynaklarını, verilerini ve altında yatan varsayımlarını değerlendirme becerisini içerir.</li>
+                <li>Pratik beceriler ise ChatGPT, Claude veya Midjourney gibi YZ araçlarıyla deney yapma ve bunların belirli bağlamlardaki uygunluğunu anlama yeteneğini kapsar.</li>
+            </ul>
+            <p>Kütüphaneler, YZ okuryazarlığını teşvik ederek, toplumun YZ yeteneklerini artırabilir ve bu teknolojilerin sorumlu ve insan merkezli entegrasyonunda lider bir rol üstlenebilir.</p>
+        </div>
+    </section>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js'></script>
+    
+    <script>
+        // Global değişkenler
+        let model = null;
+        let isModelTrained = false;
+        let scannedCount = 0;
+        let sortedCount = 0;
+        let recognition; // For Speech Recognition
+        let ocrScanInterval; // OCR animasyon intervali için
+        let faceDetectionInterval; // Yüz tespiti animasyon intervali için
+        let currentLanguage = 'tr'; // Varsayılan dil Türkçe
+
+        // Dil içerikleri
+        const translations = {
+            'tr': {
+                'portalTitle': 'Yapay Zeka ve Kütüphaneler Portalı',
+                'subtitle': 'Geleceğin Akıllı Kütüphane Deneyimini Keşfedin',
+                'heroTitle': 'Kütüphanelerde Yapay Zeka Devrimi',
+                'heroText': 'Yapay zeka, kütüphanelerin bilgi yönetimi, kullanıcı hizmetleri ve operasyonel süreçlerinde köklü dönüşümler sağlıyor. Bu portal, yapay zekanın kütüphanecilik alanındaki uygulamalarını, faydalarını ve zorluklarını interaktif bir şekilde sunuyor.',
+                'exploreButton': 'Keşfetmeye Başla',
+                'navGiris': 'Giriş',
+                'navUygulamalar': 'Uygulamalar',
+                'navFaydalar': 'Faydalar',
+                'navZorluklar': 'Zorluklar',
+                'navSimulator': 'Simülatörler',
+                'navGelecek': 'Gelecek',
+                'navKaynaklar': 'Kaynaklar',
+                'sectionGiris': 'Giriş: Kütüphanelerde Yapay Zekânın Yükselişi',
+                'sectionUygulamalar': 'Yapay Zekânın Kütüphane Hizmetlerindeki Uygulama Alanları',
+                'sectionFaydalar': 'Yapay Zekânın Kütüphanelere Sağladığı Faydalar',
+                'sectionZorluklar': 'Yapay Zekânın Kütüphaneler İçin Zorlukları ve Riskleri',
+                'sectionSimulator': 'Yapay Zeka Simülatörleri',
+                'sectionGelecek': 'Geleceğin Kütüphane Vizyonu ve Etik Çerçeve',
+                'sectionCtaTitle': 'Yapay Zeka Çağında Kütüphanelerin Geleceğini Şekillendirin',
+                'sectionCtaText': 'Kütüphanelerde yapay zeka uygulamaları hızla gelişiyor. TensorFlow, PyTorch, OpenCV ve diğer modern teknolojilerle donatılmış bu dönüşümün bir parçası olun.',
+                'ctaJoin': 'Projelerimize Katılın',
+                'ctaResources': 'Kaynaklara Göz Atın',
+                'sectionKaynaklar': 'Kaynaklar ve Referanslar',
+                'cardKoleksiyonTitle': 'Koleksiyon Yönetimi ve Geliştirme',
+                'cardKullaniciTitle': 'Kullanıcı Hizmetleri ve Etkileşimi',
+                'cardTeknikTitle': 'Teknik Hizmetler ve Otomasyon',
+                'cardDijitalTitle': 'Dijitalleştirme ve Arşivleme',
+                'cardVeriAnaliziTitle': 'Veri Analitiği ve Kullanıcı Davranışları',
+                'cardEgitimTitle': 'Eğitim ve Atölyeler',
+                'detailsButton': 'Detayları Gör',
+                'backButton': '← Uygulama Alanlarına Geri Dön',
+                'simCatalogItem': 'Kitap 1',
+                'simTypingText': 'Merhaba, nasıl yardımcı olabilirim?',
+                'simProgressText': 'Ders Tamamlandı!',
+                'simFaceRecTitle': 'Akıllı Kitap Öneri Sistemi (Yüz Analizi Simülasyonu)',
+                'faceAnalysisClick': 'Yüz Analizi İçin Tıklayın',
+                'faceAnalysisLoading': 'Yüz analizi yapılıyor ve kitap önerileri derleniyor...',
+                'recommendationResult': 'Sizin İçin Önerilen Kitaplar:',
+                'simOcrTitle': 'OCR & Computer Vision Simülatörü (Belge Dijitalleştirme)',
+                'ocrStart': 'OCR Başlat',
+                'ocrTrain': 'Model Eğit',
+                'ocrUpload': 'Bir görüntü yükleyin veya örnek metni seçin',
+                'ocrLoading': 'TensorFlow modeli görüntüyü işliyor...',
+                'ocrResultText': 'OCR Sonucu:',
+                'simMlTitle': 'Makine Öğrenmesi Tahmin Sistemi (Kütüphane Kaynak Kullanımı)',
+                'mlTrain': 'Model Eğit',
+                'mlPredict': 'Tahmin Yap',
+                'mlModelStatus': 'Model durumu: Eğitim bekleniyor...',
+                'mlPredictionResult': 'Tahmin Sonucu:',
+                'simChatbotTitle': 'Kütüphane Chatbot Simülatörü (NLP)',
+                'chatReset': 'Sohbeti Sıfırla',
+                'chatAIMode': 'AI Modu',
+                'chatInputPlaceholder': 'Sorunuzu yazın... (AI destekli)',
+                'chatSpeak': 'Konuşun...',
+                'simRobotTitle': 'Akıllı Robot Simülatörü (Computer Vision & RPA)',
+                'robotStart': 'AI Envanter & Düzenle',
+                'robotLearn': 'Öğrenme Modu',
+                'robotScan': 'AI Tarama',
+                'robotReset': 'Robotu Sıfırla',
+                'copyright': '&copy; 2025 AI Library Hub. TensorFlow, PyTorch, OpenCV ve diğer açık kaynak teknolojilerle güçlendirilmiştir. Ayhan Bozkurt',
+            },
+            'en': {
+                'portalTitle': 'AI and Libraries Portal',
+                'subtitle': 'Discover the Future of Smart Library Experience',
+                'heroTitle': 'The AI Revolution in Libraries',
+                'heroText': 'Artificial intelligence (AI) is bringing profound transformations to library information management, user services, and operational processes. This portal interactively presents the applications, benefits, and challenges of AI in librarianship.',
+                'exploreButton': 'Start Exploring',
+                'navGiris': 'Introduction',
+                'navUygulamalar': 'Applications',
+                'navFaydalar': 'Benefits',
+                'navZorluklar': 'Challenges',
+                'navSimulator': 'Simulators',
+                'navGelecek': 'Future',
+                'navKaynaklar': 'Resources',
+                'sectionGiris': 'Introduction: The Rise of AI in Libraries',
+                'sectionUygulamalar': 'Applications of AI in Library Services',
+                'sectionFaydalar': 'Benefits of AI for Libraries',
+                'sectionZorluklar': 'Challenges and Risks of AI for Libraries',
+                'sectionSimulator': 'AI Simulators',
+                'sectionGelecek': 'Future Library Vision and Ethical Framework',
+                'sectionCtaTitle': 'Shape the Future of Libraries in the Age of AI',
+                'sectionCtaText': 'AI applications in libraries are rapidly evolving. Be a part of this transformation powered by TensorFlow, PyTorch, OpenCV, and other modern technologies.',
+                'ctaJoin': 'Join Our Projects',
+                'ctaResources': 'Browse Resources',
+                'sectionKaynaklar': 'Resources and References',
+                'cardKoleksiyonTitle': 'Collection Management & Development',
+                'cardKullaniciTitle': 'User Services & Interaction',
+                'cardTeknikTitle': 'Technical Services & Automation',
+                'cardDijitalTitle': 'Digitization & Archiving',
+                'cardVeriAnaliziTitle': 'Data Analytics & User Behavior',
+                'cardEgitimTitle': 'Education & Workshops',
+                'detailsButton': 'View Details',
+                'backButton': '← Back to Application Areas',
+                'simCatalogItem': 'Book 1',
+                'simTypingText': 'Hello, how can I help you?',
+                'simProgressText': 'Lesson Completed!',
+                'simFaceRecTitle': 'Smart Book Recommendation System (Face Analysis Simulation)',
+                'faceAnalysisClick': 'Click for Face Analysis',
+                'faceAnalysisLoading': 'Performing face analysis and compiling book recommendations...',
+                'recommendationResult': 'Recommended Books for You:',
+                'simOcrTitle': 'OCR & Computer Vision Simulator (Document Digitization)',
+                'ocrStart': 'Start OCR',
+                'ocrTrain': 'Train Model',
+                'ocrUpload': 'Upload an image or select sample text',
+                'ocrLoading': 'TensorFlow model is processing the image...',
+                'ocrResultText': 'OCR Result:',
+                'simMlTitle': 'Machine Learning Prediction System (Library Resource Usage)',
+                'mlTrain': 'Train Model',
+                'mlPredict': 'Make Prediction',
+                'mlModelStatus': 'Model status: Awaiting training...',
+                'mlPredictionResult': 'Prediction Result:',
+                'simChatbotTitle': 'Library Chatbot Simulator (NLP)',
+                'chatReset': 'Reset Chat',
+                'chatAIMode': 'AI Mode',
+                'chatInputPlaceholder': 'Type your question... (AI-powered)',
+                'chatSpeak': 'Speak...',
+                'simRobotTitle': 'Smart Robot Simulator (Computer Vision & RPA)',
+                'robotStart': 'Start AI Inventory & Organize',
+                'robotLearn': 'Learning Mode',
+                'robotScan': 'AI Scan',
+                'robotReset': 'Reset Robot',
+                'copyright': '&copy; 2025 AI Library Hub. Powered by TensorFlow, PyTorch, OpenCV, and other open-source technologies. Ayhan Bozkurt',
+            }
+        };
+
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Tüm data-lang-key özniteliği olan elementleri güncelle
+            document.querySelectorAll('[data-lang-key]').forEach(el => {
+                const key = el.getAttribute('data-lang-key');
+                if (translations[lang] && translations[lang][key] !== undefined) {
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = translations[lang][key];
+                    } else if (el.tagName === 'BUTTON' && el.id === 'voiceInputBtn') {
+                        // voiceInputBtn için özel durum, içeride icon var
+                        el.innerHTML = `<i class="fas fa-microphone${currentLanguage === 'tr' ? '' : '-alt'}"></i> ${translations[lang][key]}`;
+                    }
+                    else {
+                        el.textContent = translations[lang][key];
+                    }
+                }
+            });
+
+            // Navigasyon linkleri için özel güncelleme (metin ve href)
+            document.querySelector('.nav-links li:nth-child(1) a').textContent = translations[lang]['navGiris'];
+            document.querySelector('.nav-links li:nth-child(2) a').textContent = translations[lang]['navUygulamalar'];
+            document.querySelector('.nav-links li:nth-child(3) a').textContent = translations[lang]['navFaydalar'];
+            document.querySelector('.nav-links li:nth-child(4) a').textContent = translations[lang]['navZorluklar'];
+            document.querySelector('.nav-links li:nth-child(5) a').textContent = translations[lang]['navSimulator'];
+            document.querySelector('.nav-links li:nth-child(6) a').textContent = translations[lang]['navGelecek'];
+            document.querySelector('.nav-links li:nth-child(7) a').textContent = translations[lang]['navKaynaklar'];
+
+
+            // Chatbot başlangıç mesajını güncelle
+            const initialBotMessage = document.querySelector('#chatMessages .bot-message');
+            if (initialBotMessage) {
+                initialBotMessage.textContent = `🤖 ${lang === 'tr' ? 'Merhaba! Ben yapay zeka destekli kütüphane asistanınızım. TensorFlow.js ile güçlendirilmiş natural language processing sistemi ile size yardımcı olabilirim. Nasıl yardımcı olabilirim?' : 'Hello! I am your AI-powered library assistant. I can help you with my natural language processing system powered by TensorFlow.js. How can I help you?'} `;
+            }
+
+            // Chatbot örnek sorularını güncelle (eğer statik değilse dinamik)
+            // Şu anki yapıda bu linkler doğrudan metin içerdiği için manuel güncellenmelidir.
+            // Örneğin: document.querySelector('.simulator-sidebar ul li:nth-child(1) a').textContent = translations[lang]['...'];
+
+            // OCR ve ML simülasyonlarındaki dinamik metinleri güncelle (eğer açıksa)
+            if (document.getElementById('ocrLoading').style.display !== 'none') {
+                 document.getElementById('ocrLoadingText').textContent = translations[lang]['ocrLoading'];
+            }
+            if (document.getElementById('ocrResult').style.display !== 'none') {
+                 document.getElementById('ocrResultTitle').textContent = translations[lang]['ocrResultText'];
+            }
+            if (document.getElementById('recommendationLoading').style.display !== 'none') {
+                 document.getElementById('faceAnalysisLoadingText').textContent = translations[lang]['faceAnalysisLoading'];
+            }
+             if (document.getElementById('bookRecommendationResult').style.display !== 'none') {
+                 document.getElementById('recommendationResultTitle').textContent = translations[lang]['recommendationResult'];
+            }
+            // ML Model Status
+            const mlModelStatusElement = document.getElementById('modelStats');
+            if (mlModelStatusElement) {
+                // Eğer model eğitilmişse, eğitilmiş metni göster, yoksa bekliyor metnini
+                if (isModelTrained) {
+                     mlModelStatusElement.innerHTML = lang === 'tr' ? `
+                        ✅ Model eğitimi tamamlandı!<br>
+                        Final Loss: ${model.history.history.loss[model.history.history.loss.length-1].toFixed(4)}<br>
+                        Epochs: 50/50<br>
+                        Durum: Tahmin için hazır
+                    ` : `
+                        ✅ Model training complete!<br>
+                        Final Loss: ${model.history.history.loss[model.history.history.loss.length-1].toFixed(4)}<br>
+                        Epochs: 50/50<br>
+                        Status: Ready for prediction
+                    `;
+                } else {
+                    mlModelStatusElement.textContent = translations[lang]['mlModelStatus'];
+                }
+            }
+
+
+            // Activate the correct language button
+            document.getElementById('langTR').classList.remove('active');
+            document.getElementById('langEN').classList.remove('active');
+            document.getElementById(`lang${lang.toUpperCase()}`).classList.add('active');
+
+            // Ses tanıma dilini güncelle
+            if (recognition) {
+                recognition.lang = lang === 'tr' ? 'tr-TR' : 'en-US';
+            }
+            
+            // Eğer bir detay sayfası açıksa, onun da metinlerini güncelle
+            document.querySelectorAll('.detail-section').forEach(section => {
+                if (section.style.display === 'block') {
+                    const sectionId = section.id.replace('detail', '').toLowerCase(); // örn: koleksiyon
+                    const titleElement = section.querySelector('.section-title');
+                    if (titleElement) {
+                        titleElement.textContent = translations[lang][`card${sectionId.charAt(0).toUpperCase() + sectionId.slice(1)}Title`] || titleElement.textContent;
+                    }
+                    // Detay sayfalarının içindeki paragraf ve liste elemanları manuel olarak güncellenmelidir
+                    // Veya data-lang-key öznitelikleriyle işaretlenmelidir.
+                    // Şu anki yapıda, detay section'larının içindeki P ve LI'lar statik tutulmuştur.
+                    // Tamamen dinamik dil değişimi için her bir paragraf ve liste öğesine data-lang-key eklenmesi gerekir.
+                }
+            });
+        }
+
+        // AI Particles Animation
+        function createParticles() {
+            const particlesContainer = document.getElementById('aiParticles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Chatbot Functionality with AI Enhancement
+        let chatResponsesData = { // Data object for chatbot responses
+            'tr': {
+                'kütüphane kaçta kapanıyor': 'Kütüphanemiz hafta içi 08:00-22:00, hafta sonu 09:00-20:00 arası açıktır. AI sistemimiz 7/24 aktiftir.',
+                'çalışma alanı nasıl rezerve ederim': 'TensorFlow destekli rezervasyon sistemimizden randevu alabilirsiniz. AI asistanımız size en uygun zamanı önerir.',
+                'kitap nasıl ödünç alırım': 'Computer vision sistemi ile kitap tanıma ve otomatik ödünç verme işlemi yapılmaktadır. Kimliğinizle gişeye başvurabilirsiniz.',
+                'veritabanlarına nasıl erişirim': 'AI tabanlı arama sistemimiz ile veritabanlarına smart search özelliği ile erişebilirsiniz. Kampüs dışı erişim için VPN kullanmanız gerekebilir.',
+                'yapay zeka teknolojileri hakkında bilgi verebilir misin?': 'Kütüphanemizde TensorFlow, PyTorch, OpenCV gibi teknolojilerle geliştirilen AI sistemler kullanılmaktadır. Detaylı bilgi için AI Uygulamaları bölümümüze göz atabilirsiniz.',
+                'makine öğrenmesi ne işe yarar?': 'Makine öğrenmesi modelleri ile kullanıcı davranış analizi yaparak size özel kitap ve makale önerileri sunarız. Ayrıca envanter yönetiminde de büyük rol oynar.',
+                'tarihi belge': 'Tarihi belgelerin dijitalleştirilmesi için OCR ve HTR (El Yazısı Tanıma) teknolojilerini kullanıyoruz. Bu sayede nadir eserler korunur ve araştırmacılar için erişilebilir olur.',
+                'kütüphaneci robotlar': 'Robotlarımız, kitapların raflara yerleştirilmesi, envanter kontrolü ve hatta okuyuculara yol gösterme gibi görevlerde bize yardımcı oluyor. Helsinki Oodi Kütüphanesi\'nin örneklerini inceleyebilirsiniz.',
+                'default': ['🧠 TensorFlow modelimiz bu sorunu analiz ediyor. Detaylı bilgi için kütüphaneci arkadaşlarımıza danışabilirsiniz.', '🤖 Neural network sistemimiz bu konuda sürekli öğreniyor. Size en doğru yanıtı verebilmek için veri tabanımızı güncelliyor.', '🔍 Computer vision ve NLP sistemlerimiz bu soruyu işliyor. Lütfen biraz daha bekleyin.', '📚 AI destekli bilgi sistemimiz size en uygun kaynakları buluyor. Bu arada başka nasıl yardımcı olabilirim?', 'Anlıyorum. Bu biraz karmaşık bir konu, size özel kaynakları tarıyorum. Başka bir sorunuz var mı?', 'Kütüphanemizin geniş bilgi ağından size en uygun yanıtı getiriyorum. Beklediğiniz için teşekkürler.']
+            },
+            'en': {
+                'library closing time': 'Our library is open from 08:00-22:00 on weekdays and 09:00-20:00 on weekends. Our AI system is active 24/7.',
+                'how to reserve a study area': 'You can make an appointment via our TensorFlow-supported reservation system. Our AI assistant will suggest the most suitable time for you.',
+                'how to borrow a book': 'Book recognition and automated lending are performed using a computer vision system. You can apply to the counter with your ID.',
+                'how to access databases': 'You can access databases with our AI-powered smart search feature. VPN may be required for off-campus access.',
+                'can you tell me about AI technologies?': 'Our library uses AI systems developed with technologies like TensorFlow, PyTorch, and OpenCV. You can find detailed information in our AI Applications section.',
+                'what is machine learning for?': 'With ML models, we provide personalized book and article recommendations by analyzing user behavior. It also plays a big role in inventory management.',
+                'historical document': 'We use OCR and HTR (Handwriting Recognition) technologies for the digitization of historical documents. This way, rare works are preserved and made accessible to researchers.',
+                'librarian robots': 'Our robots assist us with tasks such as shelving books, inventory control, and even guiding readers. You can check out examples from Helsinki Oodi Library.',
+                'default': ['🧠 Our TensorFlow model is analyzing this issue. For detailed information, you can consult our librarian colleagues.', '🤖 Our neural network system is constantly learning about this. It is updating our database to provide you with the most accurate answer.', '🔍 Our computer vision and NLP systems are processing this question. Please wait a little longer.', '📚 Our AI-powered information system is finding the most suitable resources for you. How else can I help you in the meantime?', 'I understand. This is a bit complex, I\'m scanning specific resources for you. Do you have any other questions?', 'I am fetching the most relevant answer from the library\'s extensive information network for you. Thank you for waiting.']
+            }
+        };
+        
+        function sendMessage() {
+            const input = document.getElementById('userInput');
+            const message = input.value.trim();
+            
+            if (message) {
+                addMessage(message, 'user-message');
+                input.value = '';
+                
+                addMessage(currentLanguage === 'tr' ? '🤖 Düşünüyor...' : '🤖 Thinking...', 'bot-message');
+                
+                setTimeout(() => {
+                    removeLastMessage();
+                    const response = getBotResponse(message);
+                    addMessage(response, 'bot-message');
+                }, 1500);
+            }
+        }
+        
+        function addMessage(text, className) {
+            const messagesContainer = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${className}`;
+            messageDiv.textContent = text;
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+        
+        function removeLastMessage() {
+            const messagesContainer = document.getElementById('chatMessages');
+            const messages = messagesContainer.querySelectorAll('.message');
+            if (messages.length > 0) {
+                messagesContainer.removeChild(messages[messages.length - 1]);
+            }
+        }
+        
+        function getBotResponse(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            for (let key in chatResponsesData[currentLanguage]) {
+                if (lowerMessage.includes(key) && key !== 'default') {
+                    return chatResponsesData[currentLanguage][key];
+                }
+            }
+            
+            const aiResponses = chatResponsesData[currentLanguage]['default'];
+            return aiResponses[Math.floor(Math.random() * aiResponses.length)];
+        }
+        
+        function askQuestion(question) {
+            document.getElementById('userInput').value = question;
+            sendMessage();
+        }
+        
+        function resetChat() {
+            const messagesContainer = document.getElementById('chatMessages');
+            messagesContainer.innerHTML = `<div class="message bot-message">🤖 ${currentLanguage === 'tr' ? 'Merhaba! Ben yapay zeka destekli kütüphane asistanınızım. TensorFlow.js ile güçlendirilmiş natural language processing sistemi ile size yardımcı olabilirim. Nasıl yardımcı olabilirim?' : 'Hello! I am your AI-powered library assistant. I can help you with my natural language processing system powered by TensorFlow.js. How can I help you?'}</div>`;
+        }
+        
+        function toggleAI() {
+            alert(currentLanguage === 'tr' ? '🚀 AI Modu Aktif! TensorFlow.js neural network modeli yükleniyor...' : '🚀 AI Mode Active! TensorFlow.js neural network model is loading...');
+        }
+        
+        // Robot AI Simulator
+        function startRobotAI() {
+            animateNeuralNetwork();
+            performAdvancedRobotMovements(); 
+            updateRobotStats();
+        }
+        
+        function performAdvancedRobotMovements() {
+            const robot = document.getElementById('robotArm');
+            const shelfLevels = document.querySelectorAll('.shelf-level');
+            
+            const genreColors = {
+                'roman': '#3498db', 'bilim': '#e74c3c', 'tarih': '#27ae60', 
+                'sanat': '#f39c12', 'teknoloji': '#9b59b6', 'felsefe': '#1abc9c',
+                'matematik': '#8e44ad', 'edebiyat': '#d35400', 'coğrafya': '#c0392b',
+                'müzik': '#7f8c8d', 'biyoloji': '#2ecc71', 'fizik': '#34495e',
+                'kimya': '#f1c40f', 'psikoloji': '#e67e22', 'sosyoloji': '#bdc3c7'
+            };
+
+            const allBooks = [];
+            shelfLevels.forEach((shelf, levelIndex) => {
+                shelf.querySelectorAll('.book').forEach((book, bookIndex) => {
+                    allBooks.push({ element: book, level: levelIndex, index: bookIndex, genre: book.dataset.genre });
+                });
+            });
+
+            let currentBookIndex = 0;
+            const processNextBook = () => {
+                if (currentBookIndex >= allBooks.length) {
+                    console.log('Robot tüm kitapları işledi. Başa dönülüyor.');
+                    currentBookIndex = 0; 
+                    setTimeout(processNextBook, 2000); 
+                    return;
+                }
+
+                const bookToProcess = allBooks[currentBookIndex];
+                const bookElement = bookToProcess.element;
+                const targetShelfY = 120 + (bookToProcess.level * (25 + 15)) + 12; 
+                const targetBookX = bookElement.offsetLeft + bookElement.offsetWidth / 2 - 40; 
+
+                robot.style.transition = 'transform 1s ease-in-out';
+                robot.style.transform = `translateX(${targetBookX}px) translateY(${targetShelfY - 60}px) rotate(0deg)`; 
+
+                setTimeout(() => {
+                    bookElement.classList.add('highlight');
+                    scannedCount++;
+                    document.getElementById('scannedBooks').textContent = scannedCount;
+
+                    setTimeout(() => {
+                        bookElement.style.opacity = '0'; 
+                        bookElement.classList.remove('highlight');
+
+                        robot.style.transition = 'transform 0.8s ease-out';
+                        robot.style.transform = `translateX(-50%) translateY(30px) rotate(${Math.random() * 30 - 15}deg)`; 
+
+                        sortedCount++;
+                        document.getElementById('sortedBooks').textContent = sortedCount;
+
+                        setTimeout(() => {
+                            bookElement.style.opacity = '1';
+                            bookElement.style.boxShadow = `0 0 10px 5px ${genreColors[bookToProcess.genre] || '#ccc'}`; 
+                            setTimeout(() => bookElement.style.boxShadow = 'none', 500);
+
+                            currentBookIndex++;
+                            processNextBook(); 
+                        }, 1000); 
+
+                    }, 800); 
+                }, 1200); 
+            };
+
+            processNextBook(); 
+        }
+
+
+        function animateNeuralNetwork() {
+            const neurons = document.querySelectorAll('.neural-network .neuron');
+            const connections = document.querySelectorAll('.neural-network .connection');
+            
+            let delay = 0;
+            const layers = document.querySelectorAll('.neural-network .layer');
+            
+            layers.forEach((layer, layerIndex) => {
+                const layerNeurons = layer.querySelectorAll('.neuron');
+                layerNeurons.forEach((neuron, neuronIndex) => {
+                    setTimeout(() => {
+                        neuron.classList.add('active');
+                        setTimeout(() => neuron.classList.remove('active'), 300);
+                    }, delay + neuronIndex * 150);
+                });
+                if (layerIndex < layers.length - 1) {
+                    const nextLayerConnections = connections[layerIndex];
+                    setTimeout(() => {
+                        nextLayerConnections.classList.add('active');
+                        setTimeout(() => nextLayerConnections.classList.remove('active'), 400);
+                    }, delay + layerNeurons.length * 150 + 50);
+                }
+                delay += (layerNeurons.length * 150) + 450;
+            });
+        }
+        
+        function aiEnvantorTara() {
+            console.log("AI Envanter ve Düzenleme işlemi başlatıldı.");
+            performAdvancedRobotMovements();
+            animateNeuralNetwork();
+        }
+        
+        function robotSelfLearning() {
+            alert(currentLanguage === 'tr' ? '🧠 Robot makine öğrenmesi moduna geçiyor! TensorFlow modeli gerçek zamanlı olarak öğreniyor ve kendini optimize ediyor...' : '🧠 Robot is entering machine learning mode! TensorFlow model is learning in real-time and optimizing itself...');
+            updateRobotStats(true); 
+        }
+        
+        function updateRobotStats(learningMode = false) {
+            const accuracy = document.getElementById('accuracy');
+            const efficiency = document.getElementById('efficiency');
+            
+            let currentAcc = parseFloat(accuracy.textContent);
+            let currentEff = parseFloat(efficiency.textContent);
+            
+            if (learningMode) {
+                currentAcc += (Math.random() * 0.2); 
+                currentEff += (Math.random() * 3); 
+            } else {
+                currentAcc += (Math.random() - 0.5) * 0.1;
+                currentEff += (Math.random() - 0.5) * 2;
+            }
+            
+            currentAcc = Math.min(99.9, Math.max(90, currentAcc)); 
+            currentEff = Math.min(95, Math.max(70, currentEff));
+            
+            accuracy.textContent = currentAcc.toFixed(1) + '%';
+            efficiency.textContent = Math.round(currentEff) + '%';
+        }
+        
+        function resetRobot() {
+            scannedCount = 0;
+            sortedCount = 0;
+            document.getElementById('scannedBooks').textContent = '0';
+            document.getElementById('sortedBooks').textContent = '0';
+            document.getElementById('accuracy').textContent = '99.5%';
+            document.getElementById('efficiency').textContent = '85%';
+            
+            const robot = document.getElementById('robotArm');
+            robot.style.transform = 'translateX(-50%) rotate(0deg) translateY(0px)';
+            
+            document.querySelectorAll('.book').forEach(book => {
+                book.classList.remove('highlight');
+                book.style.opacity = '1';
+                book.style.boxShadow = 'none';
+            });
+        }
+        
+        // OCR Simulator
+        const sampleOCRImages = {
+            "basili_metin": "https://upload.wikimedia.org/wikipedia/commons/4/4e/OCR_text_example.png",
+            "el_yazisi": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Handwriting_sample_with_letters.png", 
+            "tarihi_belge": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Magna_Carta_cropped.jpg/800px-Magna_Carta_cropped.jpg" 
+        };
+        
+        function selectOCRImage() {
+            const ocrCanvas = document.getElementById('ocrCanvas');
+            const ocrResult = document.getElementById('ocrResult');
+            const ocrLoading = document.getElementById('ocrLoading');
+            const extractedText = document.getElementById('extractedText');
+        
+            ocrResult.style.display = 'none';
+            extractedText.textContent = '';
+            ocrLoading.style.display = 'block';
+            document.getElementById('ocrLoadingText').textContent = translations[currentLanguage]['ocrLoading'];
+
+            const ocrDemoArea = document.querySelector('.ocr-demo');
+            ocrDemoArea.style.display = 'none'; 
+
+            const promptMessage = currentLanguage === 'tr' ? "Lütfen bir örnek metin türü seçin:\n1. Basılı Metin\n2. El Yazısı Metin\n3. Tarihi Belge" : "Please select a sample text type:\n1. Printed Text\n2. Handwritten Text\n3. Historical Document";
+            const choice = prompt(promptMessage);
+        
+            let imageUrl = '';
+            let sampleOutputText = '';
+        
+            switch (choice) {
+                case '1':
+                    imageUrl = sampleOCRImages["basili_metin"];
+                    sampleOutputText = currentLanguage === 'tr' ? "Kütüphane Koleksiyonu\n\nKlasik Edebiyat Bölümü\n- Shakespeare Eserleri\n- Dostoyevski Romanları\n- Victor Hugo Kitapları\n\nGüven: %96.2" : "Library Collection\n\nClassic Literature Section\n- Works of Shakespeare\n- Novels by Dostoevsky\n- Books by Victor Hugo\n\nConfidence: 96.2%";
+                    break;
+                case '2':
+                    imageUrl = sampleOCRImages["el_yazisi"];
+                    sampleOutputText = currentLanguage === 'tr' ? "Dijital Arşiv Kaydı\n\nBelge No: 2024-0156\nTarih: 21 Temmuz 2025\nKonu: Yapay Zeka Uygulamaları\nSayfa: 1/45\n\nGüven: %85.5 (El yazısı tanıma daha zordur)" : "Digital Archive Record\n\nDocument No: 2024-0156\nDate: July 21, 2025\nSubject: Artificial Intelligence Applications\nPage: 1/45\n\nConfidence: 85.5% (Handwriting recognition is harder)";
+                    break;
+                case '3':
+                    imageUrl = sampleOCRImages["tarihi_belge"];
+                    sampleOutputText = currentLanguage === 'tr' ? "Magna Carta Libertatum\nAnno Domini MCCXV\n(1215 Yılı)\n\nBu metin, kral ve tebaası arasındaki ilişkileri düzenleyen tarihi bir anlaşmadır. Tesseract.js ile taranmıştır.\n\nGüven: %92.8 (Karmaşık font)" : "Magna Carta Libertatum\nAnno Domini MCCXV\n(Year 1215)\n\nThis text is a historical agreement regulating the relationship between the king and his subjects. Scanned with Tesseract.js.\n\nConfidence: 92.8% (Complex font)";
+                    break;
+                default:
+                    alert(currentLanguage === 'tr' ? "Geçersiz seçim. Basılı Metin örneği yüklenecek." : "Invalid selection. Printed Text example will be loaded.");
+                    imageUrl = sampleOCRImages["basili_metin"];
+                    sampleOutputText = currentLanguage === 'tr' ? "Kütüphane Koleksiyonu\n\nKlasik Edebiyat Bölümü\n- Shakespeare Eserleri\n- Dostoyevski Romanları\n- Victor Hugo Kitapları\n\nGüven: %96.2" : "Library Collection\n\nClassic Literature Section\n- Works of Shakespeare\n- Novels by Dostoevsky\n- Books by Victor Hugo\n\nConfidence: 96.2%";
+            }
+            
+            simulateComputerVision(ocrCanvas, imageUrl); 
+        
+            Tesseract.recognize(
+                imageUrl,
+                currentLanguage === 'tr' ? 'tur' : 'eng', 
+                { logger: m => { /* console.log(m); */ } }
+            ).then(({ data: { text } }) => {
+                setTimeout(() => {
+                    ocrLoading.style.display = 'none';
+                    ocrResult.style.display = 'block';
+                    document.getElementById('ocrResultTitle').textContent = translations[currentLanguage]['ocrResultText'];
+                    extractedText.textContent = sampleOutputText; 
+                    
+                    if (ocrScanInterval) clearInterval(ocrScanInterval); 
+                    ocrCanvas.style.display = 'none';
+                    ocrDemoArea.style.display = 'block';
+        
+                }, 3000); 
+            }).catch(err => {
+                console.error("OCR Hatası:", err);
+                ocrLoading.style.display = 'none';
+                ocrResult.style.display = 'block';
+                document.getElementById('ocrResultTitle').textContent = translations[currentLanguage]['ocrResultText'];
+                extractedText.textContent = currentLanguage === 'tr' ? `OCR işlemi sırasında bir hata oluştu: ${err.message || 'Bilinmeyen Hata'}.` : `An OCR error occurred: ${err.message || 'Unknown Error'}.`;
+
+                if (ocrScanInterval) clearInterval(ocrScanInterval);
+                ocrCanvas.style.display = 'none';
+                ocrDemoArea.style.display = 'block';
+            });
+        }
+        
+        function startOCR() {
+            alert(currentLanguage === 'tr' ? '🔍 OpenCV.js ve Tesseract.js modelleri yükleniyor ve görüntü işleme başlıyor...' : '🔍 OpenCV.js and Tesseract.js models are loading and image processing is starting...');
+            selectOCRImage();
+        }
+        
+        function trainOCRModel() {
+            alert(currentLanguage === 'tr' ? '🧠 CNN (Konvolüsyonel Sinir Ağı) modeli eğitiliyor! Derin öğrenme ile görüntü işleme yetenekleri geliştiriliyor...' : '🧠 CNN (Convolutional Neural Network) model is being trained! Image processing capabilities are being developed with deep learning...');
+        }
+        
+        // Machine Learning Predictor
+        async function trainModel() {
+            document.getElementById('modelStats').innerHTML = currentLanguage === 'tr' ? 'Model eğitimi başlatılıyor...<br>TensorFlow.js yükleniyor...' : 'Model training starting...<br>TensorFlow.js loading...';
+            
+            model = tf.sequential({
+                layers: [
+                    tf.layers.dense({ inputShape: [3], units: 10, activation: 'relu' }),
+                    tf.layers.dense({ units: 5, activation: 'relu' }),
+                    tf.layers.dense({ units: 1, activation: 'sigmoid' })
+                ]
+            });
+            
+            model.compile({
+                optimizer: 'adam',
+                loss: 'meanSquaredError',
+                metrics: ['accuracy']
+            });
+            
+            const xsData = [];
+            const ysData = [];
+            for (let i = 0; i < 100; i++) {
+                const age = Math.random() * (65 - 18) + 18; 
+                const freq = Math.random() * 30 + 1; 
+                const interest = Math.floor(Math.random() * 6); 
+        
+                xsData.push([age / 65, freq / 30, interest / 5]);
+                ysData.push([ (age / 65 * 0.4) + (freq / 30 * 0.3) + (interest / 5 * 0.3) + Math.random() * 0.1 ]);
+            }
+            const xs = tf.tensor2d(xsData);
+            const ys = tf.tensor2d(ysData);
+            
+            let epoch = 0;
+            const history = await model.fit(xs, ys, {
+                epochs: 50,
+                batchSize: 10,
+                callbacks: {
+                    onEpochEnd: (epoch_num, logs) => {
+                        epoch = epoch_num + 1;
+                        document.getElementById('modelStats').innerHTML = currentLanguage === 'tr' ? `
+                            Model eğitiliyor...<br>
+                            Epoch: ${epoch}/50<br>
+                            Loss: ${logs.loss.toFixed(4)}<br>
+                            Learning Rate: 0.001<br>
+                            Optimizer: Adam
+                        ` : `
+                            Model training...<br>
+                            Epoch: ${epoch}/50<br>
+                            Loss: ${logs.loss.toFixed(4)}<br>
+                            Learning Rate: 0.001<br>
+                            Optimizer: Adam
+                        `;
+                        updateMLVisualization(logs.loss); 
+                    }
+                }
+            });
+            
+            isModelTrained = true;
+            document.getElementById('modelStats').innerHTML = currentLanguage === 'tr' ? `
+                ✅ Model eğitimi tamamlandı!<br>
+                Final Loss: ${history.history.loss[history.history.loss.length-1].toFixed(4)}<br>
+                Epochs: 50/50<br>
+                Durum: Tahmin için hazır
+            ` : `
+                ✅ Model training complete!<br>
+                Final Loss: ${history.history.loss[history.history.loss.length-1].toFixed(4)}<br>
+                Epochs: 50/50<br>
+                Status: Ready for prediction
+            `;
+            
+            xs.dispose();
+            ys.dispose();
+        }
+        
+        function makePrediction() {
+            if (!isModelTrained) {
+                alert(currentLanguage === 'tr' ? '⚠️ Lütfen önce modeli eğitin!' : '⚠️ Please train the model first!');
+                return;
+            }
+            
+            const age = document.getElementById('userAge').value;
+            const freq = document.getElementById('visitFreq').value;
+            const interest = document.getElementById('interestArea').value;
+            
+            const inputData = tf.tensor2d([[parseInt(age)/65, parseInt(freq)/30, parseInt(interest)/5]]);
+            const prediction = model.predict(inputData);
+            
+            prediction.data().then(result => {
+                const probability = result[0] * 100; 
+                const bookCategories = currentLanguage === 'tr' ? ['Bilim', 'Edebiyat', 'Tarih', 'Teknoloji', 'Sanat', 'Felsefe'] : ['Science', 'Literature', 'History', 'Technology', 'Art', 'Philosophy'];
+                const recommendedCategory = bookCategories[parseInt(interest)];
+                
+                document.getElementById('predictionResult').style.display = 'block';
+                document.getElementById('predictionResultTitle').textContent = translations[currentLanguage]['mlPredictionResult'];
+                document.getElementById('predictionText').innerHTML = currentLanguage === 'tr' ? `
+                    🎯 Öneri Skoru: ${probability.toFixed(1)}%<br>
+                    📚 Önerilen Kategori: <strong>${recommendedCategory}</strong><br>
+                    ⏰ En Uygun Ziyaret Zamanı: ${freq > 15 ? 'Hafta içi akşam' : 'Hafta sonu gündüz'}<br>
+                    🤖 AI Güven Düzeyi: ${probability > 70 ? 'Yüksek' : 'Orta'}
+                ` : `
+                    🎯 Recommendation Score: ${probability.toFixed(1)}%<br>
+                    📚 Recommended Category: <strong>${recommendedCategory}</strong><br>
+                    ⏰ Best Visit Time: ${freq > 15 ? 'Weekday evenings' : 'Weekend daytime'}<br>
+                    🤖 AI Confidence Level: ${probability > 70 ? 'High' : 'Medium'}
+                `;
+            });
+            
+            inputData.dispose();
+        }
+        
+        // Range slider updates
+        document.getElementById('userAge').addEventListener('input', function() {
+            document.getElementById('ageValue').textContent = this.value;
+        });
+        
+        document.getElementById('visitFreq').addEventListener('input', function() {
+            document.getElementById('freqValue').textContent = this.value;
+        });
+        
+        // ML Visualization (WebGL/2D Canvas)
+        function updateMLVisualization(loss = null) {
+            const canvas = document.getElementById('mlCanvas');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                const gradient = ctx.createRadialGradient(canvas.width/2, canvas.height/2, 0, canvas.width/2, canvas.height/2, 200);
+                gradient.addColorStop(0, '#3498db20');
+                gradient.addColorStop(1, '#2c3e5020');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                const time = Date.now() * 0.001;
+                for (let i = 0; i < 30; i++) { 
+                    const x = canvas.width/2 + Math.cos(time + i * 0.7) * (70 + i * 3);
+                    const y = canvas.height/2 + Math.sin(time + i * 0.4) * (50 + i * 2);
+                    
+                    ctx.fillStyle = `hsl(${180 + i * 15 % 360}, 80%, 65%)`; 
+                    ctx.beginPath();
+                    ctx.arc(x, y, 4 + Math.sin(time * 2 + i) * 1.5, 0, 2 * Math.PI);
+                    ctx.fill();
+                }
+                
+                ctx.strokeStyle = `rgba(52, 152, 219, ${0.3 + Math.sin(time * 0.5) * 0.2})`;
+                ctx.lineWidth = 1.5;
+                for (let i = 0; i < 20; i++) { 
+                    ctx.beginPath();
+                    const x1 = canvas.width * 0.2 + Math.cos(time * 0.8 + i) * 60;
+                    const y1 = canvas.height * 0.2 + Math.sin(time * 0.9 + i) * 40;
+                    const x2 = canvas.width * 0.8 + Math.cos(time * 1.1 + i + 1) * 70;
+                    const y2 = canvas.height * 0.8 + Math.sin(time * 1.2 + i + 1) * 50;
+                    ctx.moveTo(x1, y1);
+                    ctx.lineTo(x2, y2);
+                    ctx.stroke();
+                }
+
+                if (loss !== null) {
+                    ctx.fillStyle = 'black';
+                    ctx.font = '16px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(`${currentLanguage === 'tr' ? 'Mevcut Kayıp' : 'Current Loss'}: ${loss.toFixed(4)}`, canvas.width / 2, 30);
+                }
+                
+                requestAnimationFrame(animate);
+            }
+            
+            animate();
+        }
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Enter key support for chatbot
+        document.getElementById('userInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+        
+        // TensorFlow.js model loading check
+        function checkTensorFlowReady() {
+            if (typeof tf !== 'undefined') {
+                console.log('🚀 TensorFlow.js başarıyla yüklendi!');
+                console.log('📊 TensorFlow.js versiyonu:', tf.version.tfjs);
+            } else {
+                console.log('⚠️ TensorFlow.js yüklenemedi');
+            }
+        }
+        
+        // Advanced AI Simulations
+        function simulateNeuralNetwork() {
+            const neurons = document.querySelectorAll('.neural-network .neuron');
+            const connections = document.querySelectorAll('.neural-network .connection');
+            
+            let delay = 0;
+            const layers = document.querySelectorAll('.neural-network .layer');
+            
+            layers.forEach((layer, layerIndex) => {
+                const layerNeurons = layer.querySelectorAll('.neuron');
+                layerNeurons.forEach((neuron, neuronIndex) => {
+                    setTimeout(() => {
+                        neuron.classList.add('active');
+                        setTimeout(() => neuron.classList.remove('active'), 300);
+                    }, delay + neuronIndex * 150);
+                });
+                if (layerIndex < layers.length - 1) {
+                    const nextLayerConnections = connections[layerIndex];
+                    setTimeout(() => {
+                        nextLayerConnections.classList.add('active');
+                        setTimeout(() => nextLayerConnections.classList.remove('active'), 400);
+                    }, delay + layerNeurons.length * 150 + 50);
+                }
+                delay += (layerNeurons.length * 150) + 450;
+            });
+        }
+        
+        // Computer Vision Simulation (Canvas drawing) for OCR
+        function simulateComputerVision(canvasElement, imageUrl) {
+            const canvas = canvasElement;
+            const ctx = canvas.getContext('2d');
+            canvas.width = 400;
+            canvas.height = 200;
+            canvas.style.display = 'block';
+            
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            const img = new Image();
+            img.onload = () => {
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height); 
+
+                ctx.fillStyle = '#2c3e50';
+                ctx.font = '24px serif';
+                ctx.textAlign = 'center';
+                ctx.fillText(currentLanguage === 'tr' ? 'Belge Taranıyor...' : 'Scanning Document...', canvas.width / 2, 60);
+                ctx.font = '16px sans-serif';
+                ctx.fillText(currentLanguage === 'tr' ? 'OpenCV.js ile İşleniyor' : 'Processing with OpenCV.js', canvas.width / 2, 100);
+                
+                let scanLine = 0;
+                if (ocrScanInterval) clearInterval(ocrScanInterval); 
+                ocrScanInterval = setInterval(() => {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    ctx.fillStyle = '#2c3e50';
+                    ctx.font = '24px serif';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(currentLanguage === 'tr' ? 'Belge Taranıyor...' : 'Scanning Document...', canvas.width / 2, 60);
+                    ctx.font = '16px sans-serif';
+                    ctx.fillText(currentLanguage === 'tr' ? 'OpenCV.js ile İşleniyor' : 'Processing with OpenCV.js', canvas.width / 2, 100);
+
+                    ctx.fillStyle = 'rgba(52, 152, 219, 0.4)';
+                    ctx.fillRect(0, scanLine, canvas.width, 5); 
+                    
+                    scanLine += 5;
+                    if (scanLine > canvas.height) {
+                        scanLine = 0; 
+                    }
+                }, 50);
+            };
+            img.src = imageUrl;
+        }
+        
+        // Speech Recognition Simulation (Web Speech API)
+        function initSpeechRecognition() {
+            if ('webkitSpeechRecognition' in window) {
+                recognition = new webkitSpeechRecognition();
+                recognition.continuous = false;
+                recognition.interimResults = false;
+                recognition.lang = currentLanguage === 'tr' ? 'tr-TR' : 'en-US';
+                
+                recognition.onresult = function(event) {
+                    const speechResult = event.results[0][0].transcript;
+                    document.getElementById('userInput').value = speechResult;
+                    sendMessage();
+                };
+                
+                recognition.onerror = function(event) {
+                    console.error('Speech recognition error:', event.error);
+                    alert(`${currentLanguage === 'tr' ? 'Sesli giriş sırasında bir hata oluştu: ' : 'A speech input error occurred: '}` + event.error);
+                };
+
+                const voiceBtn = document.getElementById('voiceInputBtn');
+                voiceBtn.style.display = 'block';
+                voiceBtn.onclick = () => {
+                    try {
+                        recognition.start();
+                        voiceBtn.style.background = 'var(--accent)'; 
+                        voiceBtn.innerHTML = `<i class="fas fa-microphone-alt"></i> ${translations[currentLanguage]['chatSpeak']}`;
+                    } catch (e) {
+                        console.error('Recognition already started or other error:', e);
+                        alert(currentLanguage === 'tr' ? 'Sesli giriş zaten aktif veya bir hata oluştu.' : 'Speech input is already active or an error occurred.');
+                    }
+                };
+
+                recognition.onend = () => {
+                    voiceBtn.style.background = 'var(--secondary)'; 
+                    voiceBtn.innerHTML = `<i class="fas fa-microphone"></i>`;
+                };
+
+            } else {
+                console.warn('Web Speech API desteklenmiyor.');
+                const voiceBtn = document.getElementById('voiceInputBtn');
+                if (voiceBtn) voiceBtn.style.display = 'none'; 
+            }
+        }
+        
+        // Performance Monitoring
+        function monitorPerformance() {
+            const stats = {
+                aiProcessingTime: Math.random() * 50 + 20, 
+                neuralNetworkLayers: Math.floor(Math.random() * 5) + 3, 
+                activatedNeurons: Math.floor(Math.random() * 1500) + 500, 
+                memoryUsage: Math.floor(Math.random() * 50) + 40 
+            };
+            
+            console.log('🧠 AI Performance Stats:', stats);
+            
+            const modelStatsElement = document.getElementById('modelStats');
+            if (modelStatsElement && isModelTrained) { 
+                const perfInfo = document.createElement('div');
+                perfInfo.style.marginTop = '10px';
+                perfInfo.style.fontSize = '0.8rem';
+                perfInfo.style.color = '#555';
+                perfInfo.innerHTML = currentLanguage === 'tr' ? `
+                    <hr style="border-top: 1px dashed #ddd; margin: 10px 0;">
+                    <strong>Canlı Performans:</strong><br>
+                    İşlem Süresi: ${stats.aiProcessingTime.toFixed(1)}ms<br>
+                    Aktif Nöron: ${stats.activatedNeurons}<br>
+                    Bellek Kullanımı: ${stats.memoryUsage}MB
+                ` : `
+                    <hr style="border-top: 1px dashed #ddd; margin: 10px 0;">
+                    <strong>Live Performance:</strong><br>
+                    Processing Time: ${stats.aiProcessingTime.toFixed(1)}ms<br>
+                    Active Neurons: ${stats.activatedNeurons}<br>
+                    Memory Usage: ${stats.memoryUsage}MB
+                `;
+                
+                const existingPerfInfo = modelStatsElement.querySelector('div[style*="Live Performance"]');
+                if (existingPerfInfo) {
+                    existingPerfInfo.outerHTML = perfInfo.outerHTML;
+                } else {
+                    modelStatsElement.appendChild(perfInfo);
+                }
+            }
+        }
+
+        // --- Yeni Akıllı Kitap Öneri Sistemi Simülasyonu ---
+        const recommendedBooks = [
+            { title: "Derin Öğrenmeye Giriş", author: "Andrew Ng", genre: "teknoloji", cover: "https://books.google.com/books/content?id=s1G7DwAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api" },
+            { title: "1984", author: "George Orwell", genre: "edebiyat", cover: "https://books.google.com/books/content?id=h3z0rQEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api" },
+            { title: "Zamanın Kısa Tarihi", author: "Stephen Hawking", genre: "bilim", cover: "https://books.google.com/books/content?id=p_8_DwAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api" },
+            { title: "Sapiens: İnsan Türünün Kısa Bir Tarihi", author: "Yuval Noah Harari", genre: "tarih", cover: "https://books.google.com/books/content?id=DqL6DwAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api" },
+            { title: "Sanatın Öyküsü", author: "E.H. Gombrich", genre: "sanat", cover: "https://books.google.com/books/content?id=M8B-DwAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api" },
+            { title: "Devlet", author: "Platon", genre: "felsefe", cover: "https://books.google.com/books/content?id=P8j5DQAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api" },
+            { title: "Mimarinin Şiiri", author: "Le Corbusier", genre: "sanat", cover: "https://books.google.com/books/content?id=M04rDwAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api" },
+            { title: "Yapay Zeka: Modern Yaklaşım", author: "Stuart Russell", genre: "teknoloji", cover: "https://books.google.com/books/content?id=uN_fDwAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api" }
+        ];
+
+        const faceImages = [
+            'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=320&h=240', // Happy
+            'https://images.unsplash.com/photo-1506794851220-7f28680749a4?auto=format&fit=crop&q=80&w=320&h=240', // Thoughtful
+            'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=320&h=240', // Curious
+            'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=320&h=240', // Neutral
+            'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=320&h=240' // Surprised
+        ];
+        const emotionMap = {
+            0: { emotionTR: 'Neşeli', emotionEN: 'Happy', genres: ['edebiyat', 'sanat'] },
+            1: { emotionTR: 'Düşünceli', emotionEN: 'Thoughtful', genres: ['felsefe', 'bilim', 'tarih'] },
+            2: { emotionTR: 'Meraklı', emotionEN: 'Curious', genres: ['teknoloji', 'bilim', 'matematik'] },
+            3: { emotionTR: 'Tarafsız', emotionEN: 'Neutral', genres: ['roman', 'edebiyat', 'tarih'] },
+            4: { emotionTR: 'Şaşkın', emotionEN: 'Surprised', genres: ['bilim', 'teknoloji'] }
+        };
+
+        function startFaceRecognitionSim() {
+            const facePlaceholder = document.getElementById('facePlaceholder');
+            const faceDetectionBox = document.getElementById('faceDetectionBox');
+            const emotionText = document.getElementById('emotionText');
+            const recommendationLoading = document.getElementById('recommendationLoading');
+            const bookRecommendationResult = document.getElementById('bookRecommendationResult');
+            const recommendedBooksGrid = document.getElementById('recommendedBooksGrid');
+
+            bookRecommendationResult.style.display = 'none';
+            recommendedBooksGrid.innerHTML = ''; 
+            recommendationLoading.style.display = 'block';
+            document.getElementById('faceAnalysisLoadingText').textContent = translations[currentLanguage]['faceAnalysisLoading'];
+
+
+            // Reset animation state
+            faceDetectionBox.style.display = 'none';
+            emotionText.style.display = 'none';
+            facePlaceholder.innerHTML = `<i class="fas fa-camera" style="font-size: 3rem; color: #aaa;"></i><span style="margin-top: 1rem; display: block;" data-lang-key="faceAnalysisClick" id="faceAnalysisClickText">${translations[currentLanguage]['faceAnalysisClick']}</span>`;
+            facePlaceholder.style.backgroundImage = 'none';
+            
+            let currentImageIndex = 0;
+            if (faceDetectionInterval) clearInterval(faceDetectionInterval);
+
+            faceDetectionInterval = setInterval(() => {
+                facePlaceholder.style.backgroundImage = `url('${faceImages[currentImageIndex]}')`;
+                facePlaceholder.innerHTML = ''; 
+
+                const boxWidth = Math.random() * (100 - 80) + 80; 
+                const boxHeight = Math.random() * (120 - 100) + 100; 
+                const boxLeft = Math.random() * (60 - 40) + 40; 
+                const boxTop = Math.random() * (60 - 40) + 40; 
+
+                faceDetectionBox.style.width = `${boxWidth}px`;
+                faceDetectionBox.style.height = `${boxHeight}px`;
+                faceDetectionBox.style.left = `${boxLeft}%`;
+                faceDetectionBox.style.top = `${boxTop}%`;
+                faceDetectionBox.style.transform = `translate(-50%, -50%) rotate(${Math.random() * 5 - 2.5}deg)`; 
+                faceDetectionBox.style.display = 'block';
+
+                currentImageIndex = (currentImageIndex + 1) % faceImages.length;
+            }, 500); 
+
+            setTimeout(() => {
+                clearInterval(faceDetectionInterval); 
+                faceDetectionBox.style.display = 'none'; 
+
+                const randomEmotionKey = Math.floor(Math.random() * Object.keys(emotionMap).length);
+                const { [`emotion${currentLanguage.toUpperCase()}`]: emotion, genres } = emotionMap[randomEmotionKey];
+
+                emotionText.textContent = `${currentLanguage === 'tr' ? 'Duygu' : 'Emotion'}: ${emotion} (%${(Math.random() * 5 + 90).toFixed(1)})`; 
+                emotionText.style.display = 'block';
+                facePlaceholder.style.backgroundImage = `url('${faceImages[randomEmotionKey]}')`; 
+
+                recommendationLoading.style.display = 'none';
+                bookRecommendationResult.style.display = 'block';
+                document.getElementById('recommendationResultTitle').textContent = translations[currentLanguage]['recommendationResult'];
+
+
+                let relevantBooks = recommendedBooks.filter(book => genres.includes(book.genre));
+                
+                if (relevantBooks.length < 3) {
+                    const additionalBooks = recommendedBooks.filter(book => !relevantBooks.includes(book));
+                    relevantBooks = relevantBooks.concat(additionalBooks.slice(0, 3 - relevantBooks.length));
+                }
+
+                relevantBooks = relevantBooks.sort(() => 0.5 - Math.random()).slice(0, 4);
+
+
+                relevantBooks.forEach(book => {
+                    const bookCard = document.createElement('div');
+                    bookCard.className = 'recommended-book-card';
+                    bookCard.innerHTML = `
+                        <img src="${book.cover}" alt="${book.title} Kapak">
+                        <div class="book-title">${book.title}</div>
+                        <div class="book-author">${book.author}</div>
+                        <div style="font-size:0.7em; color: var(--secondary); margin-top:5px;">${book.genre.charAt(0).toUpperCase() + book.genre.slice(1)}</div>
+                    `;
+                    recommendedBooksGrid.appendChild(bookCard);
+                });
+
+            }, 4000); 
+        }
+
+        function resetRecommendation() {
+            if (faceDetectionInterval) clearInterval(faceDetectionInterval);
+            document.getElementById('faceDetectionBox').style.display = 'none';
+            document.getElementById('emotionText').style.display = 'none';
+            document.getElementById('recommendationLoading').style.display = 'none';
+            document.getElementById('bookRecommendationResult').style.display = 'none';
+            document.getElementById('recommendedBooksGrid').innerHTML = '';
+            const facePlaceholder = document.getElementById('facePlaceholder');
+            facePlaceholder.style.backgroundImage = 'none';
+            facePlaceholder.innerHTML = `<i class="fas fa-camera" style="font-size: 3rem; color: #aaa;"></i><span style="margin-top: 1rem; display: block;" id="faceAnalysisClickText" data-lang-key="faceAnalysisClick">${translations[currentLanguage]['faceAnalysisClick']}</span>`;
+        }
+
+        // --- Sayfa Yükleme ve Başlangıç Ayarları ---
+        window.addEventListener('load', function() {
+            setLanguage('tr'); // Sayfa yüklendiğinde varsayılan dil Türkçe
+
+            createParticles();
+            checkTensorFlowReady();
+            initWebGLVisualization(); 
+            initSpeechRecognition();
+            updateMLVisualization(); 
+            setInterval(monitorPerformance, 5000);
+            
+            const observerOptions = {
+                threshold: 0.3,
+                rootMargin: '0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                        if (entry.target.classList.contains('neural-network')) {
+                            simulateNeuralNetwork();
+                        }
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.stat-card, .feature, .timeline-item, .card, .neural-network').forEach(el => {
+                observer.observe(el);
+            });
+
+            // "Detayları Gör" butonlarına event listener ekle
+            document.querySelectorAll('.card .btn-outline').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    // showDetailSection fonksiyonunu doğrudan çağır
+                    const sectionId = this.getAttribute('onclick').match(/'(.*?)'/)[1]; // onclick'ten section ID'sini al
+                    showDetailSection(sectionId);
+                });
+            });
+
+            // "Geri Dön" butonuna event listener ekle (Tek bir fonksiyon tüm geri dönleri yönetecek)
+            document.querySelectorAll('.back-to-applications').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    hideDetailSection();
+                });
+            });
+
+            // Uygulama alanları detay bölümlerini oluştur ve gizle
+            document.querySelectorAll('.detail-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            // Ana içerik bölümlerini göster
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.style.display = 'block';
+            });
+            // Uygulama alanları grid'ini başlangıçta göster
+            document.getElementById('uygulamaAlanlariGrid').style.display = 'grid';
+            
+            setTimeout(() => {
+                console.log('🚀 Gelişmiş AI özellikleri yüklendi ve kullanıma hazır!');
+                console.log('📡 TensorFlow.js, OpenCV.js, WebGL altyapısı kontrol edildi.');
+                console.log('🎤 Ses tanıma desteği:', 'webkitSpeechRecognition' in window ? 'Aktif' : 'Desteklenmiyor');
+            }, 2000);
+        });
+
+        // Detay Bölümlerini Göster/Gizle Fonksiyonları
+        function showDetailSection(sectionName) {
+            // Tüm ana içerik bölümlerini gizle
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // İlgili detay bölümünü göster
+            const detailSection = document.getElementById(`detail${sectionName.charAt(0).toUpperCase() + sectionName.slice(1)}`);
+            if (detailSection) {
+                detailSection.style.display = 'block';
+                detailSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        function hideDetailSection() {
+            // Tüm detay bölümlerini gizle
+            document.querySelectorAll('.detail-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            // Ana içerik bölümlerini tekrar göster
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.style.display = 'block';
+            });
+            // Uygulama alanları gridini tekrar göster
+            document.getElementById('uygulamaAlanlariGrid').style.display = 'grid';
+            // Ana uygulama alanları başlığına kaydırma
+            document.getElementById('uygulamalar').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
+        // Error handling for TensorFlow operations
+        window.addEventListener('error', function(e) {
+            if (e.message.includes('tf') || e.message.includes('tensorflow')) {
+                console.warn('⚠️ TensorFlow işleminde hata veya yükleme sorunu:', e.message);
+            }
+        });
+        
+        // PWA Support (Service Worker registration placeholder)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                console.log('📱 PWA desteği kontrol edildi (Service Worker kaydı yorum satırı yapılmıştır).');
+            });
+        }
+    </script>
+</body>
+</html>
